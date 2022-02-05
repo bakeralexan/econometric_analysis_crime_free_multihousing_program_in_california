@@ -1,0 +1,1695 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/alexbaker/Documents/Pepperdine/Capstone/Alex Capstone v1 Log File.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}29 Apr 2021, 22:02:31
+
+{com}. regress lnproperty CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, r
+{err}variable {bf}lnproperty{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. generate lnproperty = ln(PropertyRate)
+
+. generate lnviolent = ln(ViolentRate)
+
+. generate single = SingleFamily/house
+{err}house not found
+{txt}{search r(111), local:r(111);}
+
+{com}. generate multi = MultiFamily/house
+{err}house not found
+{txt}{search r(111), local:r(111);}
+
+{com}. generate mobile = MobileHomes/house
+{err}house not found
+{txt}{search r(111), local:r(111);}
+
+{com}. 
+. label variable PropertyRate "Property Crime rate per County 1991-2018"
+
+. label variable ViolentRate "Violent Crime rate per County 1991-2019"
+
+. label variable lnproperty "Log of Proportion of Property Crimes per County 1991-2018"
+
+. label variable lnviolent "Log of Proportion of Violent Crimes per County 1991-2018"
+
+. label variable Hispanic "Proportion of Hispanic Ethnicity per County 1991-2018"
+
+. label variable AsianPI "Proportion of Asian and Pacific Islander Race per County 1991-2018"
+
+. label variable White "Proportion White Race per County 1991-2018"
+
+. label variable Black "Proportion Black/African American Race per County 1991-2018"
+
+. label variable SingleFamily "Single Family Homes per County 1991-2018"
+
+. label variable MultiFamily "Multi-Family Homes per County 1991-2018"
+
+. label variable MobileHomes "Mobile Homes per County 1991-2018"
+
+. label variable FIPScounty "FIPS county codes"
+
+. label variable CrimeFree "Crime-Free Multihousing program"
+
+. label variable AreaName "County names"
+
+. label variable single "Proportion of Single Family Homes per County 1991-2018"
+{err}variable {bf}single{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. label variable multi "Proportion of Multi-Family Homes per County 1991-2018"
+{err}variable {bf}multi{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. label variable mobile "Proportion of Mobile Homes per County 1991-2018"
+{err}variable {bf}mobile{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. label variable house "Total of housing types"
+{err}variable {bf}house{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. label variable PovEstAge017 "Poverty Estimate Ages 0-17"
+
+. label variable PovEstAge517 "Poverty Estimate Ages 5-17"
+
+. label variable PovEstAllAges "Poverty Estimate All Ages"
+
+. label variable PovPerAge017 "Poverty Percentage Ages 0-17"
+
+. label variable PovPerAge517 "Poverty Percentage Ages 5-17"
+
+. label variable PovPerAllAges "Poverty Percentage All Ages"
+
+. label variable MedianHouseholdIncome "Median Household Income"
+
+. 
+. replace single = SingleFamily/TotHousing
+{err}variable {bf}single{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. replace multi = MultiFamily/TotHousing
+{err}variable {bf}multi{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. replace mobile = MobileHomes/TotHousing
+{err}variable {bf}mobile{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. generate single = SingleFamily/TotHousing
+
+. generate multi = MultiFamily/TotHousing
+
+. generate mobile = MobileHomes/TotHousing
+
+. label variable single "Proportion of Single Family Homes per County 1991-2018"
+
+. label variable multi "Proportion of Multi-Family Homes per County 1991-2018"
+
+. label variable mobile "Proportion of Mobile Homes per County 1991-2018"
+
+. summarize Year FIPScounty CrimeFree PropertyRate ViolentRate AsianPI Black Hispanic White single multi mobile PovPerAge017 PovPerAge517 PovPerAllAges MedianHouseholdIncome
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 8}Year {c |}{res}      1,254      2007.5     6.34682       1997       2018
+{txt}{space 2}FIPScounty {c |}{res}      1,254    6057.702    33.71074       6001       6115
+{txt}{space 3}CrimeFree {c |}{res}      1,254     .062201    .2416165          0          1
+{txt}PropertyRate {c |}{res}      1,254    907.7708    1158.477   29.47095   12751.68
+{txt}{space 1}ViolentRate {c |}{res}      1,254    178.7419    191.4983   5.511238   2392.739
+{txt}{hline 13}{c +}{hline 57}
+{space 5}AsianPI {c |}{res}      1,254    .0663617    .0696705   .0025182   .3869946
+{txt}{space 7}Black {c |}{res}      1,254     .404327    .4094121          0   .9606276
+{txt}{space 4}Hispanic {c |}{res}      1,254    .2695261    .1689337   .0392142   .8456229
+{txt}{space 7}White {c |}{res}      1,254    .8410598    .0925514   .4981545   .9746169
+{txt}{space 6}single {c |}{res}      1,254    .7164844    .0814165   .4050115   .9134328
+{txt}{hline 13}{c +}{hline 57}
+{space 7}multi {c |}{res}      1,254    .1889953    .1000499   .0286001   .5190264
+{txt}{space 6}mobile {c |}{res}      1,254    .0945203    .0713179   .0114011    .321133
+{txt}PovPerAge017 {c |}{res}      1,254    20.44673     7.28499        6.3         44
+{txt}PovPerAge517 {c |}{res}      1,254    19.36866    7.180631        5.4       41.8
+{txt}PovPerAllA~s {c |}{res}      1,254    14.81659    4.937172        5.1       31.9
+{txt}{hline 13}{c +}{hline 57}
+MedianHous~e {c |}{res}      1,254    50033.87    15385.57      23359     125933
+
+{com}. label variable PropertyRate "Property Crime rate per County 1997-2018"
+
+. label variable ViolentRate "Violent Crime rate per County 1997-2019"
+
+. label variable lnproperty "Log of Proportion of Property Crimes per County 1997-2018"
+
+. label variable lnviolent "Log of Proportion of Violent Crimes per County 1997-2018"
+
+. label variable Hispanic "Proportion of Hispanic Ethnicity per County 1997-2018"
+
+. label variable AsianPI "Proportion of Asian and Pacific Islander Race per County 1997-2018"
+
+. label variable White "Proportion White Race per County 1997-2018"
+
+. label variable Black "Proportion Black/African American Race per County 1997-2018"
+
+. label variable SingleFamily "Single Family Homes per County 1997-2018"
+
+. label variable MultiFamily "Multi-Family Homes per County 1997-2018"
+
+. label variable MobileHomes "Mobile Homes per County 1997-2018"
+
+. label variable FIPScounty "FIPS county codes"
+
+. label variable CrimeFree "Crime-Free Multihousing program"
+
+. label variable AreaName "County names"
+
+. label variable single "Proportion of Single Family Homes per County 1997-2018"
+
+. label variable multi "Proportion of Multi-Family Homes per County 1997-2018"
+
+. label variable mobile "Proportion of Mobile Homes per County 1997-2018"
+
+. label variable TotHousing "Total of housing types"
+
+. label variable PovEstAge017 "Poverty Estimate Ages 0-17"
+
+. label variable PovEstAge517 "Poverty Estimate Ages 5-17"
+
+. label variable PovEstAllAges "Poverty Estimate All Ages"
+
+. label variable PovPerAge017 "Poverty Percentage Ages 0-17"
+
+. label variable PovPerAge517 "Poverty Percentage Ages 5-17"
+
+. label variable PovPerAllAges "Poverty Percentage All Ages"
+
+. label variable MedianHouseholdIncome "Median Household Income"
+
+. summarize Year FIPScounty CrimeFree PropertyRate ViolentRate AsianPI Black Hispanic White single multi mobile PovPerAge017 PovPerAge517 PovPerAllAges MedianHouseholdIncome
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 8}Year {c |}{res}      1,254      2007.5     6.34682       1997       2018
+{txt}{space 2}FIPScounty {c |}{res}      1,254    6057.702    33.71074       6001       6115
+{txt}{space 3}CrimeFree {c |}{res}      1,254     .062201    .2416165          0          1
+{txt}PropertyRate {c |}{res}      1,254    907.7708    1158.477   29.47095   12751.68
+{txt}{space 1}ViolentRate {c |}{res}      1,254    178.7419    191.4983   5.511238   2392.739
+{txt}{hline 13}{c +}{hline 57}
+{space 5}AsianPI {c |}{res}      1,254    .0663617    .0696705   .0025182   .3869946
+{txt}{space 7}Black {c |}{res}      1,254     .404327    .4094121          0   .9606276
+{txt}{space 4}Hispanic {c |}{res}      1,254    .2695261    .1689337   .0392142   .8456229
+{txt}{space 7}White {c |}{res}      1,254    .8410598    .0925514   .4981545   .9746169
+{txt}{space 6}single {c |}{res}      1,254    .7164844    .0814165   .4050115   .9134328
+{txt}{hline 13}{c +}{hline 57}
+{space 7}multi {c |}{res}      1,254    .1889953    .1000499   .0286001   .5190264
+{txt}{space 6}mobile {c |}{res}      1,254    .0945203    .0713179   .0114011    .321133
+{txt}PovPerAge017 {c |}{res}      1,254    20.44673     7.28499        6.3         44
+{txt}PovPerAge517 {c |}{res}      1,254    19.36866    7.180631        5.4       41.8
+{txt}PovPerAllA~s {c |}{res}      1,254    14.81659    4.937172        5.1       31.9
+{txt}{hline 13}{c +}{hline 57}
+MedianHous~e {c |}{res}      1,254    50033.87    15385.57      23359     125933
+
+{com}. su Year FIPScounty CrimeFree PropertyRate ViolentRate AsianPI Black Hispanic White PovPerAge017 PovPerAge517 PovPerAllAges MedianHouseholdIncome, det
+
+                            {txt}Year
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}     1997           1997
+{txt} 5%    {res}     1998           1997
+{txt}10%    {res}     1999           1997       {txt}Obs         {res}      1,254
+{txt}25%    {res}     2002           1997       {txt}Sum of Wgt. {res}      1,254
+
+{txt}50%    {res}   2007.5                      {txt}Mean          {res}   2007.5
+                        {txt}Largest       Std. Dev.     {res}  6.34682
+{txt}75%    {res}     2013           2018
+{txt}90%    {res}     2016           2018       {txt}Variance      {res} 40.28212
+{txt}95%    {res}     2017           2018       {txt}Skewness      {res}        0
+{txt}99%    {res}     2018           2018       {txt}Kurtosis      {res} 1.795031
+
+                      {txt}FIPS county codes
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}     6001           6001
+{txt} 5%    {res}     6005           6001
+{txt}10%    {res}     6011           6001       {txt}Obs         {res}      1,254
+{txt}25%    {res}     6029           6001       {txt}Sum of Wgt. {res}      1,254
+
+{txt}50%    {res}     6057                      {txt}Mean          {res} 6057.702
+                        {txt}Largest       Std. Dev.     {res} 33.71074
+{txt}75%    {res}     6087           6115
+{txt}90%    {res}     6105           6115       {txt}Variance      {res} 1136.414
+{txt}95%    {res}     6111           6115       {txt}Skewness      {res} .0243003
+{txt}99%    {res}     6115           6115       {txt}Kurtosis      {res} 1.783623
+
+               {txt}Crime-Free Multihousing program
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}        0              0
+{txt} 5%    {res}        0              0
+{txt}10%    {res}        0              0       {txt}Obs         {res}      1,254
+{txt}25%    {res}        0              0       {txt}Sum of Wgt. {res}      1,254
+
+{txt}50%    {res}        0                      {txt}Mean          {res}  .062201
+                        {txt}Largest       Std. Dev.     {res} .2416165
+{txt}75%    {res}        0              1
+{txt}90%    {res}        0              1       {txt}Variance      {res} .0583786
+{txt}95%    {res}        1              1       {txt}Skewness      {res} 3.625362
+{txt}99%    {res}        1              1       {txt}Kurtosis      {res} 14.14325
+
+          {txt}Property Crime rate per County 1997-2018
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res} 43.49037       29.47095
+{txt} 5%    {res} 82.97135        34.2887
+{txt}10%    {res} 130.0188       35.48199       {txt}Obs         {res}      1,254
+{txt}25%    {res} 320.5213       37.11067       {txt}Sum of Wgt. {res}      1,254
+
+{txt}50%    {res} 646.3441                      {txt}Mean          {res} 907.7708
+                        {txt}Largest       Std. Dev.     {res} 1158.477
+{txt}75%    {res} 1077.303       9732.989
+{txt}90%    {res} 1664.799       10117.06       {txt}Variance      {res}  1342068
+{txt}95%    {res} 2345.631       10231.02       {txt}Skewness      {res} 4.651473
+{txt}99%    {res} 6492.478       12751.68       {txt}Kurtosis      {res} 32.38928
+
+           {txt}Violent Crime rate per County 1997-2019
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res} 8.231476       5.511238
+{txt} 5%    {res} 20.84424        6.07171
+{txt}10%    {res} 32.09158        6.20197       {txt}Obs         {res}      1,254
+{txt}25%    {res} 58.65108       6.763451       {txt}Sum of Wgt. {res}      1,254
+
+{txt}50%    {res}  123.383                      {txt}Mean          {res} 178.7419
+                        {txt}Largest       Std. Dev.     {res} 191.4983
+{txt}75%    {res} 239.2084       1205.857
+{txt}90%    {res} 371.6286       1259.721       {txt}Variance      {res} 36671.61
+{txt}95%    {res} 503.4396       2265.101       {txt}Skewness      {res}  3.92808
+{txt}99%    {res} 937.5396       2392.739       {txt}Kurtosis      {res} 32.59136
+
+      {txt}Proportion of Asian and Pacific Islander Race per
+                      County 1997-2018
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res} .0041806       .0025182
+{txt} 5%    {res} .0081983       .0025583
+{txt}10%    {res} .0111395       .0025847       {txt}Obs         {res}      1,254
+{txt}25%    {res} .0165422       .0028482       {txt}Sum of Wgt. {res}      1,254
+
+{txt}50%    {res} .0407734                      {txt}Mean          {res} .0663617
+                        {txt}Largest       Std. Dev.     {res} .0696705
+{txt}75%    {res} .0812453       .3639907
+{txt}90%    {res} .1611871       .3721909       {txt}Variance      {res}  .004854
+{txt}95%    {res} .2134221       .3801714       {txt}Skewness      {res} 1.872173
+{txt}99%    {res} .3196333       .3869946       {txt}Kurtosis      {res} 6.590174
+
+      {txt}Proportion Black/African American Race per County
+                          1997-2018
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res} .0029051              0
+{txt} 5%    {res} .0063499       .0009149
+{txt}10%    {res} .0090978       .0009183       {txt}Obs         {res}      1,254
+{txt}25%    {res} .0206123       .0009551       {txt}Sum of Wgt. {res}      1,254
+
+{txt}50%    {res} .0951644                      {txt}Mean          {res}  .404327
+                        {txt}Largest       Std. Dev.     {res} .4094121
+{txt}75%    {res} .8681332       .9590869
+{txt}90%    {res} .9116478       .9590899       {txt}Variance      {res} .1676183
+{txt}95%    {res} .9275919       .9596963       {txt}Skewness      {res} .2278267
+{txt}99%    {res} .9548744       .9606276       {txt}Kurtosis      {res}  1.12492
+
+         {txt}Proportion of Hispanic Ethnicity per County
+                          1997-2018
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res} .0556511       .0392142
+{txt} 5%    {res} .0713283       .0426938
+{txt}10%    {res} .0842876       .0427747       {txt}Obs         {res}      1,254
+{txt}25%    {res} .1239869       .0440083       {txt}Sum of Wgt. {res}      1,254
+
+{txt}50%    {res} .2316526                      {txt}Mean          {res} .2695261
+                        {txt}Largest       Std. Dev.     {res} .1689337
+{txt}75%    {res} .3968679       .8335504
+{txt}90%    {res} .5162989       .8394152       {txt}Variance      {res} .0285386
+{txt}95%    {res} .5685966       .8415516       {txt}Skewness      {res} .8202985
+{txt}99%    {res} .7760194       .8456229       {txt}Kurtosis      {res} 3.039158
+
+         {txt}Proportion White Race per County 1997-2018
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}  .539551       .4981545
+{txt} 5%    {res} .6384531       .5032321
+{txt}10%    {res} .7092001        .508128       {txt}Obs         {res}      1,254
+{txt}25%    {res} .8009605       .5121423       {txt}Sum of Wgt. {res}      1,254
+
+{txt}50%    {res}  .870032                      {txt}Mean          {res} .8410598
+                        {txt}Largest       Std. Dev.     {res} .0925514
+{txt}75%    {res} .9068731       .9712081
+{txt}90%    {res} .9314697       .9738735       {txt}Variance      {res} .0085658
+{txt}95%    {res} .9404842        .974285       {txt}Skewness      {res} -1.31394
+{txt}99%    {res} .9604532       .9746169       {txt}Kurtosis      {res} 4.421376
+
+                {txt}Poverty Percentage Ages 0-17
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}      7.1            6.3
+{txt} 5%    {res}      9.3            6.4
+{txt}10%    {res}       11            6.5       {txt}Obs         {res}      1,254
+{txt}25%    {res}     14.7            6.5       {txt}Sum of Wgt. {res}      1,254
+
+{txt}50%    {res}     19.9                      {txt}Mean          {res} 20.44673
+                        {txt}Largest       Std. Dev.     {res}  7.28499
+{txt}75%    {res}     25.9           40.5
+{txt}90%    {res}     30.5             42       {txt}Variance      {res} 53.07108
+{txt}95%    {res}     32.6           43.8       {txt}Skewness      {res} .2545403
+{txt}99%    {res}       37             44       {txt}Kurtosis      {res} 2.414545
+
+                {txt}Poverty Percentage Ages 5-17
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}      6.6            5.4
+{txt} 5%    {res}      8.4            5.7
+{txt}10%    {res}     10.2            5.8       {txt}Obs         {res}      1,254
+{txt}25%    {res}     13.7            5.8       {txt}Sum of Wgt. {res}      1,254
+
+{txt}50%    {res}     18.7                      {txt}Mean          {res} 19.36866
+                        {txt}Largest       Std. Dev.     {res} 7.180631
+{txt}75%    {res}     24.5           39.6
+{txt}90%    {res}     29.2           39.8       {txt}Variance      {res} 51.56147
+{txt}95%    {res}     31.7           40.7       {txt}Skewness      {res} .3035644
+{txt}99%    {res}     36.5           41.8       {txt}Kurtosis      {res} 2.445871
+
+                 {txt}Poverty Percentage All Ages
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}      5.9            5.1
+{txt} 5%    {res}      7.5            5.4
+{txt}10%    {res}      8.5            5.4       {txt}Obs         {res}      1,254
+{txt}25%    {res}       11            5.5       {txt}Sum of Wgt. {res}      1,254
+
+{txt}50%    {res}    14.45                      {txt}Mean          {res} 14.81659
+                        {txt}Largest       Std. Dev.     {res} 4.937172
+{txt}75%    {res}     18.4           29.6
+{txt}90%    {res}     21.4           29.7       {txt}Variance      {res} 24.37567
+{txt}95%    {res}     23.2           30.3       {txt}Skewness      {res} .3211462
+{txt}99%    {res}     26.8           31.9       {txt}Kurtosis      {res} 2.508306
+
+                   {txt}Median Household Income
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}    28030          23359
+{txt} 5%    {res}    30760          24430
+{txt}10%    {res}    33674          26842       {txt}Obs         {res}      1,254
+{txt}25%    {res}    38900          27042       {txt}Sum of Wgt. {res}      1,254
+
+{txt}50%    {res}    46742                      {txt}Mean          {res} 50033.87
+                        {txt}Largest       Std. Dev.     {res} 15385.57
+{txt}75%    {res}    57659         118468
+{txt}90%    {res}    70651         122930       {txt}Variance      {res} 2.37e+08
+{txt}95%    {res}    79470         122933       {txt}Skewness      {res} 1.240217
+{txt}99%    {res}   101133         125933       {txt}Kurtosis      {res}  5.22271
+
+{com}. describe
+
+{txt}Contains data from {res}/Users/alexbaker/Documents/Pepperdine/Capstone/AlexCapstonev1.dta
+{txt}  obs:{res}         1,254                          
+{txt} vars:{res}            28                          29 Apr 2021 22:00
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:Year           }{txt}{bind: int     }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Year{p_end}
+{p 0 48}{bind:FIPScounty     }{txt}{bind: int     }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FIPS county codes{p_end}
+{p 0 48}{bind:AreaName       }{txt}{bind: str22   }{bind:{txt}%22s      }{space 1}{bind:         }{bind:  }{res}{res}County names{p_end}
+{p 0 48}{bind:MultiFamily    }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Multi-Family Homes per County 1997-2018{p_end}
+{p 0 48}{bind:SingleFamily   }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Single Family Homes per County 1997-2018{p_end}
+{p 0 48}{bind:MobileHomes    }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Mobile Homes per County 1997-2018{p_end}
+{p 0 48}{bind:CrimeFree      }{txt}{bind: byte    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Crime-Free Multihousing program{p_end}
+{p 0 48}{bind:ViolentRate    }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Violent Crime rate per County 1997-2019{p_end}
+{p 0 48}{bind:PropertyRate   }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Property Crime rate per County 1997-2018{p_end}
+{p 0 48}{bind:White          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Proportion White Race per County 1997-2018{p_end}
+{p 0 48}{bind:Black          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Proportion Black/African American Race per County 1997-2018{p_end}
+{p 0 48}{bind:Native         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Native{p_end}
+{p 0 48}{bind:AsianPI        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Proportion of Asian and Pacific Islander Race per County 1997-2018{p_end}
+{p 0 48}{bind:Hispanic       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Proportion of Hispanic Ethnicity per County 1997-2018{p_end}
+{p 0 48}{bind:TotHousing     }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Total of housing types{p_end}
+{p 0 48}{bind:Single         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Single{p_end}
+{p 0 48}{bind:PovEstAllAges  }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Poverty Estimate All Ages{p_end}
+{p 0 48}{bind:PovPerAllAges  }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Poverty Percentage All Ages{p_end}
+{p 0 48}{bind:PovEstAge017   }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Poverty Estimate Ages 0-17{p_end}
+{p 0 48}{bind:PovPerAge017   }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Poverty Percentage Ages 0-17{p_end}
+{p 0 48}{bind:PovEstAge517   }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Poverty Estimate Ages 5-17{p_end}
+{p 0 48}{bind:PovPerAge517   }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Poverty Percentage Ages 5-17{p_end}
+{p 0 48}{bind:MedianHouseho~e}{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Median Household Income{p_end}
+{p 0 48}{bind:lnproperty     }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Log of Proportion of Property Crimes per County 1997-2018{p_end}
+{p 0 48}{bind:lnviolent      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Log of Proportion of Violent Crimes per County 1997-2018{p_end}
+{p 0 48}{bind:single         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Proportion of Single Family Homes per County 1997-2018{p_end}
+{p 0 48}{bind:multi          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Proportion of Multi-Family Homes per County 1997-2018{p_end}
+{p 0 48}{bind:mobile         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Proportion of Mobile Homes per County 1997-2018{p_end}
+{txt}{hline}
+Sorted by: 
+{res}     Note: Dataset has changed since last saved.
+
+{com}. describe Year FIPScounty CrimeFree PropertyRate ViolentRate AsianPI Black Hispanic White PovPerAge017 PovPerAge517 PovPerAllAges MedianHouseholdIncome
+
+              {txt}storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:Year           }{txt}{bind: int     }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Year{p_end}
+{p 0 48}{bind:FIPScounty     }{txt}{bind: int     }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FIPS county codes{p_end}
+{p 0 48}{bind:CrimeFree      }{txt}{bind: byte    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Crime-Free Multihousing program{p_end}
+{p 0 48}{bind:PropertyRate   }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Property Crime rate per County 1997-2018{p_end}
+{p 0 48}{bind:ViolentRate    }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Violent Crime rate per County 1997-2019{p_end}
+{p 0 48}{bind:AsianPI        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Proportion of Asian and Pacific Islander Race per County 1997-2018{p_end}
+{p 0 48}{bind:Black          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Proportion Black/African American Race per County 1997-2018{p_end}
+{p 0 48}{bind:Hispanic       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Proportion of Hispanic Ethnicity per County 1997-2018{p_end}
+{p 0 48}{bind:White          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Proportion White Race per County 1997-2018{p_end}
+{p 0 48}{bind:PovPerAge017   }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Poverty Percentage Ages 0-17{p_end}
+{p 0 48}{bind:PovPerAge517   }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Poverty Percentage Ages 5-17{p_end}
+{p 0 48}{bind:PovPerAllAges  }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Poverty Percentage All Ages{p_end}
+{p 0 48}{bind:MedianHouseho~e}{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Median Household Income{p_end}
+
+{com}. graph twoway scatter lnviolent lnproperty, msize(small)
+{res}
+{com}. 
+. graph twoway scatter lnproperty Year, msize(small)
+{res}
+{com}. graph twoway scatter lnviolent  Year, msize(small)
+{res}
+{com}. regress lnproperty CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, r
+
+{txt}Linear regression                               Number of obs     = {res}     1,254
+                                                {txt}F(10, 1243)       =  {res}   137.64
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.5340
+                                                {txt}Root MSE          =    {res} .69707
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 23}{c |}{col 35}    Robust
+{col 1}           lnproperty{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}CrimeFree {c |}{col 23}{res}{space 2}-.5714777{col 35}{space 2} .1046522{col 46}{space 1}   -5.46{col 55}{space 3}0.000{col 63}{space 4}-.7767921{col 76}{space 3}-.3661633
+{txt}{space 16}Black {c |}{col 23}{res}{space 2} .1108741{col 35}{space 2} .0571787{col 46}{space 1}    1.94{col 55}{space 3}0.053{col 63}{space 4}-.0013033{col 76}{space 3} .2230515
+{txt}{space 16}White {c |}{col 23}{res}{space 2}-1.136212{col 35}{space 2} .6910911{col 46}{space 1}   -1.64{col 55}{space 3}0.100{col 63}{space 4}-2.492046{col 76}{space 3} .2196218
+{txt}{space 14}AsianPI {c |}{col 23}{res}{space 2}-4.065937{col 35}{space 2} .8617532{col 46}{space 1}   -4.72{col 55}{space 3}0.000{col 63}{space 4}-5.756588{col 76}{space 3}-2.375286
+{txt}{space 13}Hispanic {c |}{col 23}{res}{space 2}-2.098213{col 35}{space 2} .1709169{col 46}{space 1}  -12.28{col 55}{space 3}0.000{col 63}{space 4}-2.433531{col 76}{space 3}-1.762896
+{txt}{space 15}single {c |}{col 23}{res}{space 2} 1.069215{col 35}{space 2} .3712343{col 46}{space 1}    2.88{col 55}{space 3}0.004{col 63}{space 4} .3408997{col 76}{space 3}  1.79753
+{txt}{space 16}multi {c |}{col 23}{res}{space 2} .0189022{col 35}{space 2}   .43221{col 46}{space 1}    0.04{col 55}{space 3}0.965{col 63}{space 4}-.8290394{col 76}{space 3} .8668438
+{txt}MedianHouseholdIncome {c |}{col 23}{res}{space 2} -.000015{col 35}{space 2} 2.84e-06{col 46}{space 1}   -5.28{col 55}{space 3}0.000{col 63}{space 4}-.0000206{col 76}{space 3}-9.43e-06
+{txt}{space 9}PovPerAge017 {c |}{col 23}{res}{space 2} .0800974{col 35}{space 2} .0086278{col 46}{space 1}    9.28{col 55}{space 3}0.000{col 63}{space 4} .0631708{col 76}{space 3}  .097024
+{txt}{space 8}PovPerAllAges {c |}{col 23}{res}{space 2}-.0729704{col 35}{space 2} .0117468{col 46}{space 1}   -6.21{col 55}{space 3}0.000{col 63}{space 4}-.0960162{col 76}{space 3}-.0499246
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}  7.53487{col 35}{space 2} .7103458{col 46}{space 1}   10.61{col 55}{space 3}0.000{col 63}{space 4} 6.141261{col 76}{space 3} 8.928479
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. correlate lnviolent lnproperty CrimeFree single multi mobile Year White Hispanic Black AsianPI  PovPerAge017 PovPerAge517 PovPerAllAges MedianHouseholdIncome
+{txt}(obs=1,254)
+
+             {c |} lnviol~t lnprop~y CrimeF~e   single    multi   mobile     Year    White Hispanic    Black  AsianPI PovP~017 PovP~517 PovPer~s Median~e
+{hline 13}{c +}{hline 135}
+   lnviolent {c |}{res}   1.0000
+  {txt}lnproperty {c |}{res}   0.7402   1.0000
+   {txt}CrimeFree {c |}{res}  -0.2253  -0.3410   1.0000
+      {txt}single {c |}{res}   0.2047   0.1465  -0.1797   1.0000
+       {txt}multi {c |}{res}  -0.5010  -0.4468   0.3109  -0.7091   1.0000
+      {txt}mobile {c |}{res}   0.4692   0.4595  -0.2309  -0.1468  -0.5934   1.0000
+        {txt}Year {c |}{res}  -0.0573  -0.1892   0.1998   0.0701   0.0181  -0.1055   1.0000
+       {txt}White {c |}{res}   0.4246   0.4278  -0.3982   0.3294  -0.5873   0.4478  -0.2099   1.0000
+    {txt}Hispanic {c |}{res}  -0.2310  -0.3718   0.1214  -0.0487   0.2549  -0.3020   0.1797  -0.1360   1.0000
+       {txt}Black {c |}{res}  -0.0148   0.0900  -0.1029   0.0202  -0.0608   0.0622  -0.4318   0.1182  -0.0634   1.0000
+     {txt}AsianPI {c |}{res}  -0.6027  -0.5371   0.3474  -0.2699   0.6084  -0.5454   0.0952  -0.8770   0.1638  -0.1153   1.0000
+{txt}PovPerAge017 {c |}{res}   0.4282   0.3468  -0.0810  -0.0951  -0.2011   0.3906   0.0608   0.1292   0.2953  -0.2312  -0.3074   1.0000
+{txt}PovPerAge517 {c |}{res}   0.4254   0.3485  -0.0716  -0.1161  -0.1841   0.3908   0.0101   0.1310   0.3027  -0.2536  -0.2886   0.9843   1.0000
+{txt}PovPerAllA~s {c |}{res}   0.3368   0.2595  -0.0692  -0.0995  -0.1783   0.3638   0.1321   0.0839   0.3500  -0.2227  -0.2588   0.9516   0.9388   1.0000
+{txt}MedianHous~e {c |}{res}  -0.5295  -0.5728   0.2907   0.0083   0.4108  -0.5857   0.4863  -0.4786   0.0622  -0.1833   0.5869  -0.6550  -0.6643  -0.5980   1.0000
+
+
+{com}. pwcorr lnviolent lnproperty CrimeFree, star(0.05) sig
+
+             {txt}{c |} lnviol~t lnprop~y CrimeF~e
+{hline 13}{c +}{hline 27}
+   lnviolent {c |} {res}  1.0000 
+             {txt}{c |}
+             {c |}
+  lnproperty {c |} {res}  0.7402*  1.0000 
+             {txt}{c |}{res}   0.0000
+             {txt}{c |}
+   CrimeFree {c |} {res} -0.2253* -0.3410*  1.0000 
+             {txt}{c |}{res}   0.0000   0.0000
+             {txt}{c |}
+
+{com}. pwcorr lnviolent lnproperty CrimeFree single multi mobile Year White Hispanic Black AsianPI  PovPerAge017 PovPerAge517 PovPerAllAges MedianHouseholdIncome, star(0.05) sig
+
+             {txt}{c |} lnviol~t lnprop~y CrimeF~e   single    multi   mobile     Year
+{hline 13}{c +}{hline 63}
+   lnviolent {c |} {res}  1.0000 
+             {txt}{c |}
+             {c |}
+  lnproperty {c |} {res}  0.7402*  1.0000 
+             {txt}{c |}{res}   0.0000
+             {txt}{c |}
+   CrimeFree {c |} {res} -0.2253* -0.3410*  1.0000 
+             {txt}{c |}{res}   0.0000   0.0000
+             {txt}{c |}
+      single {c |} {res}  0.2047*  0.1465* -0.1797*  1.0000 
+             {txt}{c |}{res}   0.0000   0.0000   0.0000
+             {txt}{c |}
+       multi {c |} {res} -0.5010* -0.4468*  0.3109* -0.7091*  1.0000 
+             {txt}{c |}{res}   0.0000   0.0000   0.0000   0.0000
+             {txt}{c |}
+      mobile {c |} {res}  0.4692*  0.4595* -0.2309* -0.1468* -0.5934*  1.0000 
+             {txt}{c |}{res}   0.0000   0.0000   0.0000   0.0000   0.0000
+             {txt}{c |}
+        Year {c |} {res} -0.0573* -0.1892*  0.1998*  0.0701*  0.0181  -0.1055*  1.0000 
+             {txt}{c |}{res}   0.0425   0.0000   0.0000   0.0130   0.5209   0.0002
+             {txt}{c |}
+       White {c |} {res}  0.4246*  0.4278* -0.3982*  0.3294* -0.5873*  0.4478* -0.2099*
+             {txt}{c |}{res}   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             {txt}{c |}
+    Hispanic {c |} {res} -0.2310* -0.3718*  0.1214* -0.0487   0.2549* -0.3020*  0.1797*
+             {txt}{c |}{res}   0.0000   0.0000   0.0000   0.0848   0.0000   0.0000   0.0000
+             {txt}{c |}
+       Black {c |} {res} -0.0148   0.0900* -0.1029*  0.0202  -0.0608*  0.0622* -0.4318*
+             {txt}{c |}{res}   0.6007   0.0014   0.0003   0.4740   0.0313   0.0276   0.0000
+             {txt}{c |}
+     AsianPI {c |} {res} -0.6027* -0.5371*  0.3474* -0.2699*  0.6084* -0.5454*  0.0952*
+             {txt}{c |}{res}   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0007
+             {txt}{c |}
+PovPerAge017 {c |} {res}  0.4282*  0.3468* -0.0810* -0.0951* -0.2011*  0.3906*  0.0608*
+             {txt}{c |}{res}   0.0000   0.0000   0.0041   0.0007   0.0000   0.0000   0.0313
+             {txt}{c |}
+PovPerAge517 {c |} {res}  0.4254*  0.3485* -0.0716* -0.1161* -0.1841*  0.3908*  0.0101 
+             {txt}{c |}{res}   0.0000   0.0000   0.0112   0.0000   0.0000   0.0000   0.7216
+             {txt}{c |}
+PovPerAllA~s {c |} {res}  0.3368*  0.2595* -0.0692* -0.0995* -0.1783*  0.3638*  0.1321*
+             {txt}{c |}{res}   0.0000   0.0000   0.0143   0.0004   0.0000   0.0000   0.0000
+             {txt}{c |}
+MedianHous~e {c |} {res} -0.5295* -0.5728*  0.2907*  0.0083   0.4108* -0.5857*  0.4863*
+             {txt}{c |}{res}   0.0000   0.0000   0.0000   0.7699   0.0000   0.0000   0.0000
+             {txt}{c |}
+
+             {c |}    White Hispanic    Black  AsianPI PovP~017 PovP~517 PovPer~s
+{hline 13}{c +}{hline 63}
+       White {c |} {res}  1.0000 
+             {txt}{c |}
+             {c |}
+    Hispanic {c |} {res} -0.1360*  1.0000 
+             {txt}{c |}{res}   0.0000
+             {txt}{c |}
+       Black {c |} {res}  0.1182* -0.0634*  1.0000 
+             {txt}{c |}{res}   0.0000   0.0248
+             {txt}{c |}
+     AsianPI {c |} {res} -0.8770*  0.1638* -0.1153*  1.0000 
+             {txt}{c |}{res}   0.0000   0.0000   0.0000
+             {txt}{c |}
+PovPerAge017 {c |} {res}  0.1292*  0.2953* -0.2312* -0.3074*  1.0000 
+             {txt}{c |}{res}   0.0000   0.0000   0.0000   0.0000
+             {txt}{c |}
+PovPerAge517 {c |} {res}  0.1310*  0.3027* -0.2536* -0.2886*  0.9843*  1.0000 
+             {txt}{c |}{res}   0.0000   0.0000   0.0000   0.0000   0.0000
+             {txt}{c |}
+PovPerAllA~s {c |} {res}  0.0839*  0.3500* -0.2227* -0.2588*  0.9516*  0.9388*  1.0000 
+             {txt}{c |}{res}   0.0029   0.0000   0.0000   0.0000   0.0000   0.0000
+             {txt}{c |}
+MedianHous~e {c |} {res} -0.4786*  0.0622* -0.1833*  0.5869* -0.6550* -0.6643* -0.5980*
+             {txt}{c |}{res}   0.0000   0.0275   0.0000   0.0000   0.0000   0.0000   0.0000
+             {txt}{c |}
+
+             {c |} Median~e
+{hline 13}{c +}{hline 9}
+MedianHous~e {c |} {res}  1.0000 
+             {txt}{c |}
+             {c |}
+
+{com}. regress lnproperty CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, r
+
+{txt}Linear regression                               Number of obs     = {res}     1,254
+                                                {txt}F(10, 1243)       =  {res}   137.64
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.5340
+                                                {txt}Root MSE          =    {res} .69707
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 23}{c |}{col 35}    Robust
+{col 1}           lnproperty{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}CrimeFree {c |}{col 23}{res}{space 2}-.5714777{col 35}{space 2} .1046522{col 46}{space 1}   -5.46{col 55}{space 3}0.000{col 63}{space 4}-.7767921{col 76}{space 3}-.3661633
+{txt}{space 16}Black {c |}{col 23}{res}{space 2} .1108741{col 35}{space 2} .0571787{col 46}{space 1}    1.94{col 55}{space 3}0.053{col 63}{space 4}-.0013033{col 76}{space 3} .2230515
+{txt}{space 16}White {c |}{col 23}{res}{space 2}-1.136212{col 35}{space 2} .6910911{col 46}{space 1}   -1.64{col 55}{space 3}0.100{col 63}{space 4}-2.492046{col 76}{space 3} .2196218
+{txt}{space 14}AsianPI {c |}{col 23}{res}{space 2}-4.065937{col 35}{space 2} .8617532{col 46}{space 1}   -4.72{col 55}{space 3}0.000{col 63}{space 4}-5.756588{col 76}{space 3}-2.375286
+{txt}{space 13}Hispanic {c |}{col 23}{res}{space 2}-2.098213{col 35}{space 2} .1709169{col 46}{space 1}  -12.28{col 55}{space 3}0.000{col 63}{space 4}-2.433531{col 76}{space 3}-1.762896
+{txt}{space 15}single {c |}{col 23}{res}{space 2} 1.069215{col 35}{space 2} .3712343{col 46}{space 1}    2.88{col 55}{space 3}0.004{col 63}{space 4} .3408997{col 76}{space 3}  1.79753
+{txt}{space 16}multi {c |}{col 23}{res}{space 2} .0189022{col 35}{space 2}   .43221{col 46}{space 1}    0.04{col 55}{space 3}0.965{col 63}{space 4}-.8290394{col 76}{space 3} .8668438
+{txt}MedianHouseholdIncome {c |}{col 23}{res}{space 2} -.000015{col 35}{space 2} 2.84e-06{col 46}{space 1}   -5.28{col 55}{space 3}0.000{col 63}{space 4}-.0000206{col 76}{space 3}-9.43e-06
+{txt}{space 9}PovPerAge017 {c |}{col 23}{res}{space 2} .0800974{col 35}{space 2} .0086278{col 46}{space 1}    9.28{col 55}{space 3}0.000{col 63}{space 4} .0631708{col 76}{space 3}  .097024
+{txt}{space 8}PovPerAllAges {c |}{col 23}{res}{space 2}-.0729704{col 35}{space 2} .0117468{col 46}{space 1}   -6.21{col 55}{space 3}0.000{col 63}{space 4}-.0960162{col 76}{space 3}-.0499246
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}  7.53487{col 35}{space 2} .7103458{col 46}{space 1}   10.61{col 55}{space 3}0.000{col 63}{space 4} 6.141261{col 76}{space 3} 8.928479
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. outreg , ctitle("Property Crime 1997-2018",OLS) summtitle("SER"\"R^2"\"Adjusted R^2"\"N") se merge
+{res}{txt}warning: no existing table found for merge or append
+{res}
+{txt}{center:{hline 39}}
+{center:{txt}{lalign 26:Property Crime 1997-2018}{txt}{center 11:OLS}}
+{txt}{center:{hline 39}}
+{center:{txt}{lalign 26:CrimeFree}{res}{center 11:-0.571}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.105)**}}
+{center:{txt}{lalign 26:Black}{res}{center 11:0.111}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.057)}}
+{center:{txt}{lalign 26:White}{res}{center 11:-1.136}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.691)}}
+{center:{txt}{lalign 26:AsianPI}{res}{center 11:-4.066}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.862)**}}
+{center:{txt}{lalign 26:Hispanic}{res}{center 11:-2.098}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.171)**}}
+{center:{txt}{lalign 26:single}{res}{center 11:1.069}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.371)**}}
+{center:{txt}{lalign 26:multi}{res}{center 11:0.019}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.432)}}
+{center:{txt}{lalign 26:MedianHouseholdIncome}{res}{center 11:-0.000}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.000)**}}
+{center:{txt}{lalign 26:PovPerAge017}{res}{center 11:0.080}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.009)**}}
+{center:{txt}{lalign 26:PovPerAllAges}{res}{center 11:-0.073}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.012)**}}
+{center:{txt}{lalign 26:_cons}{res}{center 11:7.535}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.710)**}}
+{center:{txt}{lalign 26:SER}{res}{center 11:0.53}}
+{center:{txt}{lalign 26:R^2}{res}{center 11:1,254}}
+{center:{txt}{lalign 26:Adjusted R^2}{res}{center 11:}}
+{center:{txt}{lalign 26:N}{res}{center 11:}}
+{txt}{center:{hline 39}}
+
+
+{com}. xtset FIPScounty Year
+{res}{txt}{col 8}panel variable:  {res}FIPScounty (strongly balanced)
+{txt}{col 9}time variable:  {res}{col 25}Year, 1997 to 2018
+{txt}{col 17}delta:  {res}1 unit
+
+{com}. xtreg lnproperty CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, fe 
+{res}
+{txt}Fixed-effects (within) regression{col 49}Number of obs{col 67}={col 69}{res}     1,254
+{txt}Group variable: {res}FIPScounty{txt}{col 49}Number of groups{col 67}={col 69}{res}        57
+
+{txt}R-sq:{col 49}Obs per group:
+     within  = {res}0.4672{col 63}{txt}min{col 67}={col 69}{res}        22
+{txt}     between = {res}0.2954{col 63}{txt}avg{col 67}={col 69}{res}      22.0
+{txt}     overall = {res}0.3047{col 63}{txt}max{col 67}={col 69}{res}        22
+
+{txt}{col 49}F({res}10{txt},{res}1187{txt}){col 67}={col 70}{res}   104.09
+{txt}corr(u_i, Xb){col 16}= {res}-0.3091{txt}{col 49}Prob > F{col 67}={col 73}{res}0.0000
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           lnproperty{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}CrimeFree {c |}{col 23}{res}{space 2}-.0872279{col 35}{space 2} .0396958{col 46}{space 1}   -2.20{col 55}{space 3}0.028{col 63}{space 4}-.1651096{col 76}{space 3}-.0093462
+{txt}{space 16}Black {c |}{col 23}{res}{space 2} .0157931{col 35}{space 2} .0216863{col 46}{space 1}    0.73{col 55}{space 3}0.467{col 63}{space 4}-.0267547{col 76}{space 3} .0583409
+{txt}{space 16}White {c |}{col 23}{res}{space 2} 4.973129{col 35}{space 2} .7620811{col 46}{space 1}    6.53{col 55}{space 3}0.000{col 63}{space 4} 3.477953{col 76}{space 3} 6.468305
+{txt}{space 14}AsianPI {c |}{col 23}{res}{space 2} 2.603674{col 35}{space 2} 1.062389{col 46}{space 1}    2.45{col 55}{space 3}0.014{col 63}{space 4} .5193038{col 76}{space 3} 4.688044
+{txt}{space 13}Hispanic {c |}{col 23}{res}{space 2}-1.286043{col 35}{space 2} .3292511{col 46}{space 1}   -3.91{col 55}{space 3}0.000{col 63}{space 4}-1.932022{col 76}{space 3}-.6400641
+{txt}{space 15}single {c |}{col 23}{res}{space 2}-1.262255{col 35}{space 2} .7650693{col 46}{space 1}   -1.65{col 55}{space 3}0.099{col 63}{space 4}-2.763294{col 76}{space 3} .2387835
+{txt}{space 16}multi {c |}{col 23}{res}{space 2}-5.538594{col 35}{space 2} 1.084094{col 46}{space 1}   -5.11{col 55}{space 3}0.000{col 63}{space 4}-7.665548{col 76}{space 3}-3.411639
+{txt}MedianHouseholdIncome {c |}{col 23}{res}{space 2}-5.34e-06{col 35}{space 2} 1.52e-06{col 46}{space 1}   -3.52{col 55}{space 3}0.000{col 63}{space 4}-8.32e-06{col 76}{space 3}-2.36e-06
+{txt}{space 9}PovPerAge017 {c |}{col 23}{res}{space 2}-.0041774{col 35}{space 2} .0047698{col 46}{space 1}   -0.88{col 55}{space 3}0.381{col 63}{space 4}-.0135356{col 76}{space 3} .0051807
+{txt}{space 8}PovPerAllAges {c |}{col 23}{res}{space 2} .0003068{col 35}{space 2} .0071014{col 46}{space 1}    0.04{col 55}{space 3}0.966{col 63}{space 4}-.0136258{col 76}{space 3} .0142395
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2} 4.618158{col 35}{space 2} 1.168623{col 46}{space 1}    3.95{col 55}{space 3}0.000{col 63}{space 4}  2.32536{col 76}{space 3} 6.910955
+{txt}{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+              sigma_u {c |} {res} .87229552
+              {txt}sigma_e {c |} {res} .21195893
+                  {txt}rho {c |} {res} .94424779{txt}   (fraction of variance due to u_i)
+{hline 22}{c BT}{hline 64}
+F test that all u_i=0: F({res}56{txt}, {res}1187{txt}) = {res}218.87{col 62}{txt}Prob > F = {res}0.0000
+
+{com}. outreg , ctitle("Property Crime 1997-2018",FE) summtitle("SER"\"R^2"\"Adjusted R^2"\"N") se merge 
+{res}
+{txt}{center:{hline 50}}
+{center:{txt}{lalign 26:Property Crime 1997-2018}{txt}{center 11:OLS}{txt}{center 11:FE}}
+{txt}{center:{hline 50}}
+{center:{txt}{lalign 26:CrimeFree}{res}{center 11:-0.571}{res}{center 11:-0.087}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.105)**}{res}{center 11:(0.040)*}}
+{center:{txt}{lalign 26:Black}{res}{center 11:0.111}{res}{center 11:0.016}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.057)}{res}{center 11:(0.022)}}
+{center:{txt}{lalign 26:White}{res}{center 11:-1.136}{res}{center 11:4.973}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.691)}{res}{center 11:(0.762)**}}
+{center:{txt}{lalign 26:AsianPI}{res}{center 11:-4.066}{res}{center 11:2.604}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.862)**}{res}{center 11:(1.062)*}}
+{center:{txt}{lalign 26:Hispanic}{res}{center 11:-2.098}{res}{center 11:-1.286}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.171)**}{res}{center 11:(0.329)**}}
+{center:{txt}{lalign 26:single}{res}{center 11:1.069}{res}{center 11:-1.262}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.371)**}{res}{center 11:(0.765)}}
+{center:{txt}{lalign 26:multi}{res}{center 11:0.019}{res}{center 11:-5.539}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.432)}{res}{center 11:(1.084)**}}
+{center:{txt}{lalign 26:MedianHouseholdIncome}{res}{center 11:-0.000}{res}{center 11:-0.000}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.000)**}{res}{center 11:(0.000)**}}
+{center:{txt}{lalign 26:PovPerAge017}{res}{center 11:0.080}{res}{center 11:-0.004}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.009)**}{res}{center 11:(0.005)}}
+{center:{txt}{lalign 26:PovPerAllAges}{res}{center 11:-0.073}{res}{center 11:0.000}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.012)**}{res}{center 11:(0.007)}}
+{center:{txt}{lalign 26:_cons}{res}{center 11:7.535}{res}{center 11:4.618}}
+{center:{txt}{lalign 26:}{res}{center 11:(0.710)**}{res}{center 11:(1.169)**}}
+{center:{txt}{lalign 26:SER}{res}{center 11:0.53}{res}{center 11:0.47}}
+{center:{txt}{lalign 26:R^2}{res}{center 11:1,254}{res}{center 11:1,254}}
+{center:{txt}{lalign 26:Adjusted R^2}{res}{center 11:}{res}{center 11:}}
+{center:{txt}{lalign 26:N}{res}{center 11:}{res}{center 11:}}
+{txt}{center:{hline 50}}
+
+
+{com}. 
+. regress lnviolent CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, r
+
+{txt}Linear regression                               Number of obs     = {res}     1,254
+                                                {txt}F(10, 1243)       =  {res}   142.97
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.5456
+                                                {txt}Root MSE          =    {res} .67093
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 23}{c |}{col 35}    Robust
+{col 1}            lnviolent{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}CrimeFree {c |}{col 23}{res}{space 2}-.1105152{col 35}{space 2} .0873426{col 46}{space 1}   -1.27{col 55}{space 3}0.206{col 63}{space 4}-.2818704{col 76}{space 3} .0608399
+{txt}{space 16}Black {c |}{col 23}{res}{space 2}-.0820284{col 35}{space 2} .0565257{col 46}{space 1}   -1.45{col 55}{space 3}0.147{col 63}{space 4}-.1929248{col 76}{space 3}  .028868
+{txt}{space 16}White {c |}{col 23}{res}{space 2}-4.032426{col 35}{space 2} .6040042{col 46}{space 1}   -6.68{col 55}{space 3}0.000{col 63}{space 4}-5.217406{col 76}{space 3}-2.847445
+{txt}{space 14}AsianPI {c |}{col 23}{res}{space 2}-9.340708{col 35}{space 2} .7402324{col 46}{space 1}  -12.62{col 55}{space 3}0.000{col 63}{space 4}-10.79295{col 76}{space 3}-7.888465
+{txt}{space 13}Hispanic {c |}{col 23}{res}{space 2}-.9391085{col 35}{space 2} .1671518{col 46}{space 1}   -5.62{col 55}{space 3}0.000{col 63}{space 4}-1.267039{col 76}{space 3}-.6111778
+{txt}{space 15}single {c |}{col 23}{res}{space 2} .6181416{col 35}{space 2} .3371702{col 46}{space 1}    1.83{col 55}{space 3}0.067{col 63}{space 4} -.043344{col 76}{space 3} 1.279627
+{txt}{space 16}multi {c |}{col 23}{res}{space 2}-1.491921{col 35}{space 2} .3654452{col 46}{space 1}   -4.08{col 55}{space 3}0.000{col 63}{space 4}-2.208879{col 76}{space 3} -.774964
+{txt}MedianHouseholdIncome {c |}{col 23}{res}{space 2}-5.73e-06{col 35}{space 2} 2.53e-06{col 46}{space 1}   -2.27{col 55}{space 3}0.024{col 63}{space 4}-.0000107{col 76}{space 3}-7.71e-07
+{txt}{space 9}PovPerAge017 {c |}{col 23}{res}{space 2} .0961317{col 35}{space 2} .0085586{col 46}{space 1}   11.23{col 55}{space 3}0.000{col 63}{space 4} .0793408{col 76}{space 3} .1129227
+{txt}{space 8}PovPerAllAges {c |}{col 23}{res}{space 2} -.100821{col 35}{space 2} .0122049{col 46}{space 1}   -8.26{col 55}{space 3}0.000{col 63}{space 4}-.1247654{col 76}{space 3}-.0768766
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2} 8.702026{col 35}{space 2} .6617075{col 46}{space 1}   13.15{col 55}{space 3}0.000{col 63}{space 4} 7.403839{col 76}{space 3} 10.00021
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. outreg , ctitle("Violent Crime 1997-2018",OLS) summtitle("SER"\"R^2"\"Adjusted R^2"\"N") se 
+{res}
+{txt}{center:{hline 38}}
+{center:{txt}{lalign 25:Violent Crime 1997-2018}{txt}{center 11:OLS}}
+{txt}{center:{hline 38}}
+{center:{txt}{lalign 25:CrimeFree}{res}{center 11:-0.111}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.087)}}
+{center:{txt}{lalign 25:Black}{res}{center 11:-0.082}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.057)}}
+{center:{txt}{lalign 25:White}{res}{center 11:-4.032}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.604)**}}
+{center:{txt}{lalign 25:AsianPI}{res}{center 11:-9.341}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.740)**}}
+{center:{txt}{lalign 25:Hispanic}{res}{center 11:-0.939}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.167)**}}
+{center:{txt}{lalign 25:single}{res}{center 11:0.618}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.337)}}
+{center:{txt}{lalign 25:multi}{res}{center 11:-1.492}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.365)**}}
+{center:{txt}{lalign 25:MedianHouseholdIncome}{res}{center 11:-0.000}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.000)*}}
+{center:{txt}{lalign 25:PovPerAge017}{res}{center 11:0.096}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.009)**}}
+{center:{txt}{lalign 25:PovPerAllAges}{res}{center 11:-0.101}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.012)**}}
+{center:{txt}{lalign 25:_cons}{res}{center 11:8.702}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.662)**}}
+{center:{txt}{lalign 25:SER}{res}{center 11:0.55}}
+{center:{txt}{lalign 25:R^2}{res}{center 11:1,254}}
+{center:{txt}{lalign 25:Adjusted R^2}{res}{center 11:}}
+{center:{txt}{lalign 25:N}{res}{center 11:}}
+{txt}{center:{hline 38}}
+{txt}{center:* p<0.05; ** p<0.01}
+
+
+{com}. xtset FIPScounty Year
+{res}{txt}{col 8}panel variable:  {res}FIPScounty (strongly balanced)
+{txt}{col 9}time variable:  {res}{col 25}Year, 1997 to 2018
+{txt}{col 17}delta:  {res}1 unit
+
+{com}. xtreg lnviolent CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, fe
+{res}
+{txt}Fixed-effects (within) regression{col 49}Number of obs{col 67}={col 69}{res}     1,254
+{txt}Group variable: {res}FIPScounty{txt}{col 49}Number of groups{col 67}={col 69}{res}        57
+
+{txt}R-sq:{col 49}Obs per group:
+     within  = {res}0.0834{col 63}{txt}min{col 67}={col 69}{res}        22
+{txt}     between = {res}0.0013{col 63}{txt}avg{col 67}={col 69}{res}      22.0
+{txt}     overall = {res}0.0038{col 63}{txt}max{col 67}={col 69}{res}        22
+
+{txt}{col 49}F({res}10{txt},{res}1187{txt}){col 67}={col 70}{res}    10.80
+{txt}corr(u_i, Xb){col 16}= {res}-0.3294{txt}{col 49}Prob > F{col 67}={col 73}{res}0.0000
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}            lnviolent{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}CrimeFree {c |}{col 23}{res}{space 2}-.1551389{col 35}{space 2} .0679404{col 46}{space 1}   -2.28{col 55}{space 3}0.023{col 63}{space 4}-.2884355{col 76}{space 3}-.0218424
+{txt}{space 16}Black {c |}{col 23}{res}{space 2}-.1708705{col 35}{space 2} .0371167{col 46}{space 1}   -4.60{col 55}{space 3}0.000{col 63}{space 4}-.2436922{col 76}{space 3}-.0980488
+{txt}{space 16}White {c |}{col 23}{res}{space 2} .8597326{col 35}{space 2} 1.304321{col 46}{space 1}    0.66{col 55}{space 3}0.510{col 63}{space 4}  -1.6993{col 76}{space 3} 3.418765
+{txt}{space 14}AsianPI {c |}{col 23}{res}{space 2} .9238348{col 35}{space 2} 1.818307{col 46}{space 1}    0.51{col 55}{space 3}0.611{col 63}{space 4}-2.643618{col 76}{space 3} 4.491288
+{txt}{space 13}Hispanic {c |}{col 23}{res}{space 2}-2.220543{col 35}{space 2} .5635218{col 46}{space 1}   -3.94{col 55}{space 3}0.000{col 63}{space 4}-3.326152{col 76}{space 3}-1.114933
+{txt}{space 15}single {c |}{col 23}{res}{space 2} .6865124{col 35}{space 2} 1.309436{col 46}{space 1}    0.52{col 55}{space 3}0.600{col 63}{space 4}-1.882554{col 76}{space 3} 3.255579
+{txt}{space 16}multi {c |}{col 23}{res}{space 2} 1.507624{col 35}{space 2} 1.855455{col 46}{space 1}    0.81{col 55}{space 3}0.417{col 63}{space 4}-2.132713{col 76}{space 3} 5.147962
+{txt}MedianHouseholdIncome {c |}{col 23}{res}{space 2} 5.04e-07{col 35}{space 2} 2.60e-06{col 46}{space 1}    0.19{col 55}{space 3}0.846{col 63}{space 4}-4.59e-06{col 76}{space 3} 5.60e-06
+{txt}{space 9}PovPerAge017 {c |}{col 23}{res}{space 2} .0140705{col 35}{space 2} .0081636{col 46}{space 1}    1.72{col 55}{space 3}0.085{col 63}{space 4}-.0019462{col 76}{space 3} .0300873
+{txt}{space 8}PovPerAllAges {c |}{col 23}{res}{space 2}-.0258641{col 35}{space 2} .0121542{col 46}{space 1}   -2.13{col 55}{space 3}0.034{col 63}{space 4}-.0497102{col 76}{space 3}-.0020181
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2} 3.929578{col 35}{space 2} 2.000129{col 46}{space 1}    1.96{col 55}{space 3}0.050{col 63}{space 4} .0053957{col 76}{space 3}  7.85376
+{txt}{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+              sigma_u {c |} {res} .98726023
+              {txt}sigma_e {c |} {res} .36277317
+                  {txt}rho {c |} {res} .88103959{txt}   (fraction of variance due to u_i)
+{hline 22}{c BT}{hline 64}
+F test that all u_i=0: F({res}56{txt}, {res}1187{txt}) = {res}54.72{col 62}{txt}Prob > F = {res}0.0000
+
+{com}. outreg , ctitle("Violent Crime 1997-2018",FE) summtitle("SER"\"R^2"\"Adjusted R^2"\"N") se merge 
+{res}
+{txt}{center:{hline 49}}
+{center:{txt}{lalign 25:Violent Crime 1997-2018}{txt}{center 11:OLS}{txt}{center 11:FE}}
+{txt}{center:{hline 49}}
+{center:{txt}{lalign 25:CrimeFree}{res}{center 11:-0.111}{res}{center 11:-0.155}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.087)}{res}{center 11:(0.068)*}}
+{center:{txt}{lalign 25:Black}{res}{center 11:-0.082}{res}{center 11:-0.171}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.057)}{res}{center 11:(0.037)**}}
+{center:{txt}{lalign 25:White}{res}{center 11:-4.032}{res}{center 11:0.860}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.604)**}{res}{center 11:(1.304)}}
+{center:{txt}{lalign 25:AsianPI}{res}{center 11:-9.341}{res}{center 11:0.924}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.740)**}{res}{center 11:(1.818)}}
+{center:{txt}{lalign 25:Hispanic}{res}{center 11:-0.939}{res}{center 11:-2.221}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.167)**}{res}{center 11:(0.564)**}}
+{center:{txt}{lalign 25:single}{res}{center 11:0.618}{res}{center 11:0.687}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.337)}{res}{center 11:(1.309)}}
+{center:{txt}{lalign 25:multi}{res}{center 11:-1.492}{res}{center 11:1.508}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.365)**}{res}{center 11:(1.855)}}
+{center:{txt}{lalign 25:MedianHouseholdIncome}{res}{center 11:-0.000}{res}{center 11:0.000}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.000)*}{res}{center 11:(0.000)}}
+{center:{txt}{lalign 25:PovPerAge017}{res}{center 11:0.096}{res}{center 11:0.014}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.009)**}{res}{center 11:(0.008)}}
+{center:{txt}{lalign 25:PovPerAllAges}{res}{center 11:-0.101}{res}{center 11:-0.026}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.012)**}{res}{center 11:(0.012)*}}
+{center:{txt}{lalign 25:_cons}{res}{center 11:8.702}{res}{center 11:3.930}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.662)**}{res}{center 11:(2.000)*}}
+{center:{txt}{lalign 25:SER}{res}{center 11:0.55}{res}{center 11:0.08}}
+{center:{txt}{lalign 25:R^2}{res}{center 11:1,254}{res}{center 11:1,254}}
+{center:{txt}{lalign 25:Adjusted R^2}{res}{center 11:}{res}{center 11:}}
+{center:{txt}{lalign 25:N}{res}{center 11:}{res}{center 11:}}
+{txt}{center:{hline 49}}
+{txt}{center:* p<0.05; ** p<0.01}
+
+
+{com}. regress lnproperty CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, r
+
+{txt}Linear regression                               Number of obs     = {res}     1,254
+                                                {txt}F(10, 1243)       =  {res}   137.64
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.5340
+                                                {txt}Root MSE          =    {res} .69707
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 23}{c |}{col 35}    Robust
+{col 1}           lnproperty{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}CrimeFree {c |}{col 23}{res}{space 2}-.5714777{col 35}{space 2} .1046522{col 46}{space 1}   -5.46{col 55}{space 3}0.000{col 63}{space 4}-.7767921{col 76}{space 3}-.3661633
+{txt}{space 16}Black {c |}{col 23}{res}{space 2} .1108741{col 35}{space 2} .0571787{col 46}{space 1}    1.94{col 55}{space 3}0.053{col 63}{space 4}-.0013033{col 76}{space 3} .2230515
+{txt}{space 16}White {c |}{col 23}{res}{space 2}-1.136212{col 35}{space 2} .6910911{col 46}{space 1}   -1.64{col 55}{space 3}0.100{col 63}{space 4}-2.492046{col 76}{space 3} .2196218
+{txt}{space 14}AsianPI {c |}{col 23}{res}{space 2}-4.065937{col 35}{space 2} .8617532{col 46}{space 1}   -4.72{col 55}{space 3}0.000{col 63}{space 4}-5.756588{col 76}{space 3}-2.375286
+{txt}{space 13}Hispanic {c |}{col 23}{res}{space 2}-2.098213{col 35}{space 2} .1709169{col 46}{space 1}  -12.28{col 55}{space 3}0.000{col 63}{space 4}-2.433531{col 76}{space 3}-1.762896
+{txt}{space 15}single {c |}{col 23}{res}{space 2} 1.069215{col 35}{space 2} .3712343{col 46}{space 1}    2.88{col 55}{space 3}0.004{col 63}{space 4} .3408997{col 76}{space 3}  1.79753
+{txt}{space 16}multi {c |}{col 23}{res}{space 2} .0189022{col 35}{space 2}   .43221{col 46}{space 1}    0.04{col 55}{space 3}0.965{col 63}{space 4}-.8290394{col 76}{space 3} .8668438
+{txt}MedianHouseholdIncome {c |}{col 23}{res}{space 2} -.000015{col 35}{space 2} 2.84e-06{col 46}{space 1}   -5.28{col 55}{space 3}0.000{col 63}{space 4}-.0000206{col 76}{space 3}-9.43e-06
+{txt}{space 9}PovPerAge017 {c |}{col 23}{res}{space 2} .0800974{col 35}{space 2} .0086278{col 46}{space 1}    9.28{col 55}{space 3}0.000{col 63}{space 4} .0631708{col 76}{space 3}  .097024
+{txt}{space 8}PovPerAllAges {c |}{col 23}{res}{space 2}-.0729704{col 35}{space 2} .0117468{col 46}{space 1}   -6.21{col 55}{space 3}0.000{col 63}{space 4}-.0960162{col 76}{space 3}-.0499246
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}  7.53487{col 35}{space 2} .7103458{col 46}{space 1}   10.61{col 55}{space 3}0.000{col 63}{space 4} 6.141261{col 76}{space 3} 8.928479
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. outreg , ctitle("Property Crime 1997-2018",OLS) summtitle("SER"\"R^2"\"Adjusted R^2"\"N") se merge
+{res}
+{txt}{center:{hline 60}}
+{center:{txt}{lalign 25:Violent Crime 1997-2018}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS}}
+{txt}{center:{hline 60}}
+{center:{txt}{lalign 25:CrimeFree}{res}{center 11:-0.111}{res}{center 11:-0.155}{res}{center 11:-0.571}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.087)}{res}{center 11:(0.068)*}{res}{center 11:(0.105)**}}
+{center:{txt}{lalign 25:Black}{res}{center 11:-0.082}{res}{center 11:-0.171}{res}{center 11:0.111}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.057)}{res}{center 11:(0.037)**}{res}{center 11:(0.057)}}
+{center:{txt}{lalign 25:White}{res}{center 11:-4.032}{res}{center 11:0.860}{res}{center 11:-1.136}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.604)**}{res}{center 11:(1.304)}{res}{center 11:(0.691)}}
+{center:{txt}{lalign 25:AsianPI}{res}{center 11:-9.341}{res}{center 11:0.924}{res}{center 11:-4.066}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.740)**}{res}{center 11:(1.818)}{res}{center 11:(0.862)**}}
+{center:{txt}{lalign 25:Hispanic}{res}{center 11:-0.939}{res}{center 11:-2.221}{res}{center 11:-2.098}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.167)**}{res}{center 11:(0.564)**}{res}{center 11:(0.171)**}}
+{center:{txt}{lalign 25:single}{res}{center 11:0.618}{res}{center 11:0.687}{res}{center 11:1.069}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.337)}{res}{center 11:(1.309)}{res}{center 11:(0.371)**}}
+{center:{txt}{lalign 25:multi}{res}{center 11:-1.492}{res}{center 11:1.508}{res}{center 11:0.019}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.365)**}{res}{center 11:(1.855)}{res}{center 11:(0.432)}}
+{center:{txt}{lalign 25:MedianHouseholdIncome}{res}{center 11:-0.000}{res}{center 11:0.000}{res}{center 11:-0.000}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.000)*}{res}{center 11:(0.000)}{res}{center 11:(0.000)**}}
+{center:{txt}{lalign 25:PovPerAge017}{res}{center 11:0.096}{res}{center 11:0.014}{res}{center 11:0.080}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.009)**}{res}{center 11:(0.008)}{res}{center 11:(0.009)**}}
+{center:{txt}{lalign 25:PovPerAllAges}{res}{center 11:-0.101}{res}{center 11:-0.026}{res}{center 11:-0.073}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.012)**}{res}{center 11:(0.012)*}{res}{center 11:(0.012)**}}
+{center:{txt}{lalign 25:_cons}{res}{center 11:8.702}{res}{center 11:3.930}{res}{center 11:7.535}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.662)**}{res}{center 11:(2.000)*}{res}{center 11:(0.710)**}}
+{center:{txt}{lalign 25:SER}{res}{center 11:0.55}{res}{center 11:0.08}{res}{center 11:0.53}}
+{center:{txt}{lalign 25:R^2}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}}
+{center:{txt}{lalign 25:Adjusted R^2}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{center:{txt}{lalign 25:N}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{txt}{center:{hline 60}}
+{txt}{center:* p<0.05; ** p<0.01}
+
+
+{com}. xtset FIPScounty Year
+{res}{txt}{col 8}panel variable:  {res}FIPScounty (strongly balanced)
+{txt}{col 9}time variable:  {res}{col 25}Year, 1997 to 2018
+{txt}{col 17}delta:  {res}1 unit
+
+{com}. xtreg lnproperty CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, fe 
+{res}
+{txt}Fixed-effects (within) regression{col 49}Number of obs{col 67}={col 69}{res}     1,254
+{txt}Group variable: {res}FIPScounty{txt}{col 49}Number of groups{col 67}={col 69}{res}        57
+
+{txt}R-sq:{col 49}Obs per group:
+     within  = {res}0.4672{col 63}{txt}min{col 67}={col 69}{res}        22
+{txt}     between = {res}0.2954{col 63}{txt}avg{col 67}={col 69}{res}      22.0
+{txt}     overall = {res}0.3047{col 63}{txt}max{col 67}={col 69}{res}        22
+
+{txt}{col 49}F({res}10{txt},{res}1187{txt}){col 67}={col 70}{res}   104.09
+{txt}corr(u_i, Xb){col 16}= {res}-0.3091{txt}{col 49}Prob > F{col 67}={col 73}{res}0.0000
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           lnproperty{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}CrimeFree {c |}{col 23}{res}{space 2}-.0872279{col 35}{space 2} .0396958{col 46}{space 1}   -2.20{col 55}{space 3}0.028{col 63}{space 4}-.1651096{col 76}{space 3}-.0093462
+{txt}{space 16}Black {c |}{col 23}{res}{space 2} .0157931{col 35}{space 2} .0216863{col 46}{space 1}    0.73{col 55}{space 3}0.467{col 63}{space 4}-.0267547{col 76}{space 3} .0583409
+{txt}{space 16}White {c |}{col 23}{res}{space 2} 4.973129{col 35}{space 2} .7620811{col 46}{space 1}    6.53{col 55}{space 3}0.000{col 63}{space 4} 3.477953{col 76}{space 3} 6.468305
+{txt}{space 14}AsianPI {c |}{col 23}{res}{space 2} 2.603674{col 35}{space 2} 1.062389{col 46}{space 1}    2.45{col 55}{space 3}0.014{col 63}{space 4} .5193038{col 76}{space 3} 4.688044
+{txt}{space 13}Hispanic {c |}{col 23}{res}{space 2}-1.286043{col 35}{space 2} .3292511{col 46}{space 1}   -3.91{col 55}{space 3}0.000{col 63}{space 4}-1.932022{col 76}{space 3}-.6400641
+{txt}{space 15}single {c |}{col 23}{res}{space 2}-1.262255{col 35}{space 2} .7650693{col 46}{space 1}   -1.65{col 55}{space 3}0.099{col 63}{space 4}-2.763294{col 76}{space 3} .2387835
+{txt}{space 16}multi {c |}{col 23}{res}{space 2}-5.538594{col 35}{space 2} 1.084094{col 46}{space 1}   -5.11{col 55}{space 3}0.000{col 63}{space 4}-7.665548{col 76}{space 3}-3.411639
+{txt}MedianHouseholdIncome {c |}{col 23}{res}{space 2}-5.34e-06{col 35}{space 2} 1.52e-06{col 46}{space 1}   -3.52{col 55}{space 3}0.000{col 63}{space 4}-8.32e-06{col 76}{space 3}-2.36e-06
+{txt}{space 9}PovPerAge017 {c |}{col 23}{res}{space 2}-.0041774{col 35}{space 2} .0047698{col 46}{space 1}   -0.88{col 55}{space 3}0.381{col 63}{space 4}-.0135356{col 76}{space 3} .0051807
+{txt}{space 8}PovPerAllAges {c |}{col 23}{res}{space 2} .0003068{col 35}{space 2} .0071014{col 46}{space 1}    0.04{col 55}{space 3}0.966{col 63}{space 4}-.0136258{col 76}{space 3} .0142395
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2} 4.618158{col 35}{space 2} 1.168623{col 46}{space 1}    3.95{col 55}{space 3}0.000{col 63}{space 4}  2.32536{col 76}{space 3} 6.910955
+{txt}{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+              sigma_u {c |} {res} .87229552
+              {txt}sigma_e {c |} {res} .21195893
+                  {txt}rho {c |} {res} .94424779{txt}   (fraction of variance due to u_i)
+{hline 22}{c BT}{hline 64}
+F test that all u_i=0: F({res}56{txt}, {res}1187{txt}) = {res}218.87{col 62}{txt}Prob > F = {res}0.0000
+
+{com}. outreg , ctitle("Property Crime 1997-2018",FE) summtitle("SER"\"R^2"\"Adjusted R^2"\"N") se merge 
+{res}
+{txt}{center:{hline 71}}
+{center:{txt}{lalign 25:Violent Crime 1997-2018}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS}{txt}{center 11:FE}}
+{txt}{center:{hline 71}}
+{center:{txt}{lalign 25:CrimeFree}{res}{center 11:-0.111}{res}{center 11:-0.155}{res}{center 11:-0.571}{res}{center 11:-0.087}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.087)}{res}{center 11:(0.068)*}{res}{center 11:(0.105)**}{res}{center 11:(0.040)*}}
+{center:{txt}{lalign 25:Black}{res}{center 11:-0.082}{res}{center 11:-0.171}{res}{center 11:0.111}{res}{center 11:0.016}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.057)}{res}{center 11:(0.037)**}{res}{center 11:(0.057)}{res}{center 11:(0.022)}}
+{center:{txt}{lalign 25:White}{res}{center 11:-4.032}{res}{center 11:0.860}{res}{center 11:-1.136}{res}{center 11:4.973}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.604)**}{res}{center 11:(1.304)}{res}{center 11:(0.691)}{res}{center 11:(0.762)**}}
+{center:{txt}{lalign 25:AsianPI}{res}{center 11:-9.341}{res}{center 11:0.924}{res}{center 11:-4.066}{res}{center 11:2.604}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.740)**}{res}{center 11:(1.818)}{res}{center 11:(0.862)**}{res}{center 11:(1.062)*}}
+{center:{txt}{lalign 25:Hispanic}{res}{center 11:-0.939}{res}{center 11:-2.221}{res}{center 11:-2.098}{res}{center 11:-1.286}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.167)**}{res}{center 11:(0.564)**}{res}{center 11:(0.171)**}{res}{center 11:(0.329)**}}
+{center:{txt}{lalign 25:single}{res}{center 11:0.618}{res}{center 11:0.687}{res}{center 11:1.069}{res}{center 11:-1.262}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.337)}{res}{center 11:(1.309)}{res}{center 11:(0.371)**}{res}{center 11:(0.765)}}
+{center:{txt}{lalign 25:multi}{res}{center 11:-1.492}{res}{center 11:1.508}{res}{center 11:0.019}{res}{center 11:-5.539}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.365)**}{res}{center 11:(1.855)}{res}{center 11:(0.432)}{res}{center 11:(1.084)**}}
+{center:{txt}{lalign 25:MedianHouseholdIncome}{res}{center 11:-0.000}{res}{center 11:0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.000)*}{res}{center 11:(0.000)}{res}{center 11:(0.000)**}{res}{center 11:(0.000)**}}
+{center:{txt}{lalign 25:PovPerAge017}{res}{center 11:0.096}{res}{center 11:0.014}{res}{center 11:0.080}{res}{center 11:-0.004}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.009)**}{res}{center 11:(0.008)}{res}{center 11:(0.009)**}{res}{center 11:(0.005)}}
+{center:{txt}{lalign 25:PovPerAllAges}{res}{center 11:-0.101}{res}{center 11:-0.026}{res}{center 11:-0.073}{res}{center 11:0.000}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.012)**}{res}{center 11:(0.012)*}{res}{center 11:(0.012)**}{res}{center 11:(0.007)}}
+{center:{txt}{lalign 25:_cons}{res}{center 11:8.702}{res}{center 11:3.930}{res}{center 11:7.535}{res}{center 11:4.618}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.662)**}{res}{center 11:(2.000)*}{res}{center 11:(0.710)**}{res}{center 11:(1.169)**}}
+{center:{txt}{lalign 25:SER}{res}{center 11:0.55}{res}{center 11:0.08}{res}{center 11:0.53}{res}{center 11:0.47}}
+{center:{txt}{lalign 25:R^2}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}}
+{center:{txt}{lalign 25:Adjusted R^2}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{center:{txt}{lalign 25:N}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{txt}{center:{hline 71}}
+{txt}{center:* p<0.05; ** p<0.01}
+
+
+{com}. regress lnviolent CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, r
+
+{txt}Linear regression                               Number of obs     = {res}     1,254
+                                                {txt}F(10, 1243)       =  {res}   142.97
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.5456
+                                                {txt}Root MSE          =    {res} .67093
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 23}{c |}{col 35}    Robust
+{col 1}            lnviolent{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}CrimeFree {c |}{col 23}{res}{space 2}-.1105152{col 35}{space 2} .0873426{col 46}{space 1}   -1.27{col 55}{space 3}0.206{col 63}{space 4}-.2818704{col 76}{space 3} .0608399
+{txt}{space 16}Black {c |}{col 23}{res}{space 2}-.0820284{col 35}{space 2} .0565257{col 46}{space 1}   -1.45{col 55}{space 3}0.147{col 63}{space 4}-.1929248{col 76}{space 3}  .028868
+{txt}{space 16}White {c |}{col 23}{res}{space 2}-4.032426{col 35}{space 2} .6040042{col 46}{space 1}   -6.68{col 55}{space 3}0.000{col 63}{space 4}-5.217406{col 76}{space 3}-2.847445
+{txt}{space 14}AsianPI {c |}{col 23}{res}{space 2}-9.340708{col 35}{space 2} .7402324{col 46}{space 1}  -12.62{col 55}{space 3}0.000{col 63}{space 4}-10.79295{col 76}{space 3}-7.888465
+{txt}{space 13}Hispanic {c |}{col 23}{res}{space 2}-.9391085{col 35}{space 2} .1671518{col 46}{space 1}   -5.62{col 55}{space 3}0.000{col 63}{space 4}-1.267039{col 76}{space 3}-.6111778
+{txt}{space 15}single {c |}{col 23}{res}{space 2} .6181416{col 35}{space 2} .3371702{col 46}{space 1}    1.83{col 55}{space 3}0.067{col 63}{space 4} -.043344{col 76}{space 3} 1.279627
+{txt}{space 16}multi {c |}{col 23}{res}{space 2}-1.491921{col 35}{space 2} .3654452{col 46}{space 1}   -4.08{col 55}{space 3}0.000{col 63}{space 4}-2.208879{col 76}{space 3} -.774964
+{txt}MedianHouseholdIncome {c |}{col 23}{res}{space 2}-5.73e-06{col 35}{space 2} 2.53e-06{col 46}{space 1}   -2.27{col 55}{space 3}0.024{col 63}{space 4}-.0000107{col 76}{space 3}-7.71e-07
+{txt}{space 9}PovPerAge017 {c |}{col 23}{res}{space 2} .0961317{col 35}{space 2} .0085586{col 46}{space 1}   11.23{col 55}{space 3}0.000{col 63}{space 4} .0793408{col 76}{space 3} .1129227
+{txt}{space 8}PovPerAllAges {c |}{col 23}{res}{space 2} -.100821{col 35}{space 2} .0122049{col 46}{space 1}   -8.26{col 55}{space 3}0.000{col 63}{space 4}-.1247654{col 76}{space 3}-.0768766
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2} 8.702026{col 35}{space 2} .6617075{col 46}{space 1}   13.15{col 55}{space 3}0.000{col 63}{space 4} 7.403839{col 76}{space 3} 10.00021
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. outreg , ctitle("Violent Crime 1997-2018",OLS) summtitle("SER"\"R^2"\"Adjusted R^2"\"N") se merge 
+{res}
+{txt}{center:{hline 82}}
+{center:{txt}{lalign 25:Violent Crime 1997-2018}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS}}
+{txt}{center:{hline 82}}
+{center:{txt}{lalign 25:CrimeFree}{res}{center 11:-0.111}{res}{center 11:-0.155}{res}{center 11:-0.571}{res}{center 11:-0.087}{res}{center 11:-0.111}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.087)}{res}{center 11:(0.068)*}{res}{center 11:(0.105)**}{res}{center 11:(0.040)*}{res}{center 11:(0.087)}}
+{center:{txt}{lalign 25:Black}{res}{center 11:-0.082}{res}{center 11:-0.171}{res}{center 11:0.111}{res}{center 11:0.016}{res}{center 11:-0.082}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.057)}{res}{center 11:(0.037)**}{res}{center 11:(0.057)}{res}{center 11:(0.022)}{res}{center 11:(0.057)}}
+{center:{txt}{lalign 25:White}{res}{center 11:-4.032}{res}{center 11:0.860}{res}{center 11:-1.136}{res}{center 11:4.973}{res}{center 11:-4.032}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.604)**}{res}{center 11:(1.304)}{res}{center 11:(0.691)}{res}{center 11:(0.762)**}{res}{center 11:(0.604)**}}
+{center:{txt}{lalign 25:AsianPI}{res}{center 11:-9.341}{res}{center 11:0.924}{res}{center 11:-4.066}{res}{center 11:2.604}{res}{center 11:-9.341}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.740)**}{res}{center 11:(1.818)}{res}{center 11:(0.862)**}{res}{center 11:(1.062)*}{res}{center 11:(0.740)**}}
+{center:{txt}{lalign 25:Hispanic}{res}{center 11:-0.939}{res}{center 11:-2.221}{res}{center 11:-2.098}{res}{center 11:-1.286}{res}{center 11:-0.939}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.167)**}{res}{center 11:(0.564)**}{res}{center 11:(0.171)**}{res}{center 11:(0.329)**}{res}{center 11:(0.167)**}}
+{center:{txt}{lalign 25:single}{res}{center 11:0.618}{res}{center 11:0.687}{res}{center 11:1.069}{res}{center 11:-1.262}{res}{center 11:0.618}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.337)}{res}{center 11:(1.309)}{res}{center 11:(0.371)**}{res}{center 11:(0.765)}{res}{center 11:(0.337)}}
+{center:{txt}{lalign 25:multi}{res}{center 11:-1.492}{res}{center 11:1.508}{res}{center 11:0.019}{res}{center 11:-5.539}{res}{center 11:-1.492}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.365)**}{res}{center 11:(1.855)}{res}{center 11:(0.432)}{res}{center 11:(1.084)**}{res}{center 11:(0.365)**}}
+{center:{txt}{lalign 25:MedianHouseholdIncome}{res}{center 11:-0.000}{res}{center 11:0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.000)*}{res}{center 11:(0.000)}{res}{center 11:(0.000)**}{res}{center 11:(0.000)**}{res}{center 11:(0.000)*}}
+{center:{txt}{lalign 25:PovPerAge017}{res}{center 11:0.096}{res}{center 11:0.014}{res}{center 11:0.080}{res}{center 11:-0.004}{res}{center 11:0.096}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.009)**}{res}{center 11:(0.008)}{res}{center 11:(0.009)**}{res}{center 11:(0.005)}{res}{center 11:(0.009)**}}
+{center:{txt}{lalign 25:PovPerAllAges}{res}{center 11:-0.101}{res}{center 11:-0.026}{res}{center 11:-0.073}{res}{center 11:0.000}{res}{center 11:-0.101}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.012)**}{res}{center 11:(0.012)*}{res}{center 11:(0.012)**}{res}{center 11:(0.007)}{res}{center 11:(0.012)**}}
+{center:{txt}{lalign 25:_cons}{res}{center 11:8.702}{res}{center 11:3.930}{res}{center 11:7.535}{res}{center 11:4.618}{res}{center 11:8.702}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.662)**}{res}{center 11:(2.000)*}{res}{center 11:(0.710)**}{res}{center 11:(1.169)**}{res}{center 11:(0.662)**}}
+{center:{txt}{lalign 25:SER}{res}{center 11:0.55}{res}{center 11:0.08}{res}{center 11:0.53}{res}{center 11:0.47}{res}{center 11:0.55}}
+{center:{txt}{lalign 25:R^2}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}}
+{center:{txt}{lalign 25:Adjusted R^2}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{center:{txt}{lalign 25:N}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{txt}{center:{hline 82}}
+{txt}{center:* p<0.05; ** p<0.01}
+
+
+{com}. xtset FIPScounty Year
+{res}{txt}{col 8}panel variable:  {res}FIPScounty (strongly balanced)
+{txt}{col 9}time variable:  {res}{col 25}Year, 1997 to 2018
+{txt}{col 17}delta:  {res}1 unit
+
+{com}. xtreg lnviolent CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, fe
+{res}
+{txt}Fixed-effects (within) regression{col 49}Number of obs{col 67}={col 69}{res}     1,254
+{txt}Group variable: {res}FIPScounty{txt}{col 49}Number of groups{col 67}={col 69}{res}        57
+
+{txt}R-sq:{col 49}Obs per group:
+     within  = {res}0.0834{col 63}{txt}min{col 67}={col 69}{res}        22
+{txt}     between = {res}0.0013{col 63}{txt}avg{col 67}={col 69}{res}      22.0
+{txt}     overall = {res}0.0038{col 63}{txt}max{col 67}={col 69}{res}        22
+
+{txt}{col 49}F({res}10{txt},{res}1187{txt}){col 67}={col 70}{res}    10.80
+{txt}corr(u_i, Xb){col 16}= {res}-0.3294{txt}{col 49}Prob > F{col 67}={col 73}{res}0.0000
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}            lnviolent{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}CrimeFree {c |}{col 23}{res}{space 2}-.1551389{col 35}{space 2} .0679404{col 46}{space 1}   -2.28{col 55}{space 3}0.023{col 63}{space 4}-.2884355{col 76}{space 3}-.0218424
+{txt}{space 16}Black {c |}{col 23}{res}{space 2}-.1708705{col 35}{space 2} .0371167{col 46}{space 1}   -4.60{col 55}{space 3}0.000{col 63}{space 4}-.2436922{col 76}{space 3}-.0980488
+{txt}{space 16}White {c |}{col 23}{res}{space 2} .8597326{col 35}{space 2} 1.304321{col 46}{space 1}    0.66{col 55}{space 3}0.510{col 63}{space 4}  -1.6993{col 76}{space 3} 3.418765
+{txt}{space 14}AsianPI {c |}{col 23}{res}{space 2} .9238348{col 35}{space 2} 1.818307{col 46}{space 1}    0.51{col 55}{space 3}0.611{col 63}{space 4}-2.643618{col 76}{space 3} 4.491288
+{txt}{space 13}Hispanic {c |}{col 23}{res}{space 2}-2.220543{col 35}{space 2} .5635218{col 46}{space 1}   -3.94{col 55}{space 3}0.000{col 63}{space 4}-3.326152{col 76}{space 3}-1.114933
+{txt}{space 15}single {c |}{col 23}{res}{space 2} .6865124{col 35}{space 2} 1.309436{col 46}{space 1}    0.52{col 55}{space 3}0.600{col 63}{space 4}-1.882554{col 76}{space 3} 3.255579
+{txt}{space 16}multi {c |}{col 23}{res}{space 2} 1.507624{col 35}{space 2} 1.855455{col 46}{space 1}    0.81{col 55}{space 3}0.417{col 63}{space 4}-2.132713{col 76}{space 3} 5.147962
+{txt}MedianHouseholdIncome {c |}{col 23}{res}{space 2} 5.04e-07{col 35}{space 2} 2.60e-06{col 46}{space 1}    0.19{col 55}{space 3}0.846{col 63}{space 4}-4.59e-06{col 76}{space 3} 5.60e-06
+{txt}{space 9}PovPerAge017 {c |}{col 23}{res}{space 2} .0140705{col 35}{space 2} .0081636{col 46}{space 1}    1.72{col 55}{space 3}0.085{col 63}{space 4}-.0019462{col 76}{space 3} .0300873
+{txt}{space 8}PovPerAllAges {c |}{col 23}{res}{space 2}-.0258641{col 35}{space 2} .0121542{col 46}{space 1}   -2.13{col 55}{space 3}0.034{col 63}{space 4}-.0497102{col 76}{space 3}-.0020181
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2} 3.929578{col 35}{space 2} 2.000129{col 46}{space 1}    1.96{col 55}{space 3}0.050{col 63}{space 4} .0053957{col 76}{space 3}  7.85376
+{txt}{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+              sigma_u {c |} {res} .98726023
+              {txt}sigma_e {c |} {res} .36277317
+                  {txt}rho {c |} {res} .88103959{txt}   (fraction of variance due to u_i)
+{hline 22}{c BT}{hline 64}
+F test that all u_i=0: F({res}56{txt}, {res}1187{txt}) = {res}54.72{col 62}{txt}Prob > F = {res}0.0000
+
+{com}. outreg , ctitle("Violent Crime 1997-2018",FE) summtitle("SER"\"R^2"\"Adjusted R^2"\"N") se merge 
+{res}
+{txt}{center:{hline 93}}
+{center:{txt}{lalign 25:Violent Crime 1997-2018}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS}{txt}{center 11:FE}}
+{txt}{center:{hline 93}}
+{center:{txt}{lalign 25:CrimeFree}{res}{center 11:-0.111}{res}{center 11:-0.155}{res}{center 11:-0.571}{res}{center 11:-0.087}{res}{center 11:-0.111}{res}{center 11:-0.155}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.087)}{res}{center 11:(0.068)*}{res}{center 11:(0.105)**}{res}{center 11:(0.040)*}{res}{center 11:(0.087)}{res}{center 11:(0.068)*}}
+{center:{txt}{lalign 25:Black}{res}{center 11:-0.082}{res}{center 11:-0.171}{res}{center 11:0.111}{res}{center 11:0.016}{res}{center 11:-0.082}{res}{center 11:-0.171}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.057)}{res}{center 11:(0.037)**}{res}{center 11:(0.057)}{res}{center 11:(0.022)}{res}{center 11:(0.057)}{res}{center 11:(0.037)**}}
+{center:{txt}{lalign 25:White}{res}{center 11:-4.032}{res}{center 11:0.860}{res}{center 11:-1.136}{res}{center 11:4.973}{res}{center 11:-4.032}{res}{center 11:0.860}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.604)**}{res}{center 11:(1.304)}{res}{center 11:(0.691)}{res}{center 11:(0.762)**}{res}{center 11:(0.604)**}{res}{center 11:(1.304)}}
+{center:{txt}{lalign 25:AsianPI}{res}{center 11:-9.341}{res}{center 11:0.924}{res}{center 11:-4.066}{res}{center 11:2.604}{res}{center 11:-9.341}{res}{center 11:0.924}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.740)**}{res}{center 11:(1.818)}{res}{center 11:(0.862)**}{res}{center 11:(1.062)*}{res}{center 11:(0.740)**}{res}{center 11:(1.818)}}
+{center:{txt}{lalign 25:Hispanic}{res}{center 11:-0.939}{res}{center 11:-2.221}{res}{center 11:-2.098}{res}{center 11:-1.286}{res}{center 11:-0.939}{res}{center 11:-2.221}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.167)**}{res}{center 11:(0.564)**}{res}{center 11:(0.171)**}{res}{center 11:(0.329)**}{res}{center 11:(0.167)**}{res}{center 11:(0.564)**}}
+{center:{txt}{lalign 25:single}{res}{center 11:0.618}{res}{center 11:0.687}{res}{center 11:1.069}{res}{center 11:-1.262}{res}{center 11:0.618}{res}{center 11:0.687}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.337)}{res}{center 11:(1.309)}{res}{center 11:(0.371)**}{res}{center 11:(0.765)}{res}{center 11:(0.337)}{res}{center 11:(1.309)}}
+{center:{txt}{lalign 25:multi}{res}{center 11:-1.492}{res}{center 11:1.508}{res}{center 11:0.019}{res}{center 11:-5.539}{res}{center 11:-1.492}{res}{center 11:1.508}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.365)**}{res}{center 11:(1.855)}{res}{center 11:(0.432)}{res}{center 11:(1.084)**}{res}{center 11:(0.365)**}{res}{center 11:(1.855)}}
+{center:{txt}{lalign 25:MedianHouseholdIncome}{res}{center 11:-0.000}{res}{center 11:0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}{res}{center 11:0.000}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.000)*}{res}{center 11:(0.000)}{res}{center 11:(0.000)**}{res}{center 11:(0.000)**}{res}{center 11:(0.000)*}{res}{center 11:(0.000)}}
+{center:{txt}{lalign 25:PovPerAge017}{res}{center 11:0.096}{res}{center 11:0.014}{res}{center 11:0.080}{res}{center 11:-0.004}{res}{center 11:0.096}{res}{center 11:0.014}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.009)**}{res}{center 11:(0.008)}{res}{center 11:(0.009)**}{res}{center 11:(0.005)}{res}{center 11:(0.009)**}{res}{center 11:(0.008)}}
+{center:{txt}{lalign 25:PovPerAllAges}{res}{center 11:-0.101}{res}{center 11:-0.026}{res}{center 11:-0.073}{res}{center 11:0.000}{res}{center 11:-0.101}{res}{center 11:-0.026}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.012)**}{res}{center 11:(0.012)*}{res}{center 11:(0.012)**}{res}{center 11:(0.007)}{res}{center 11:(0.012)**}{res}{center 11:(0.012)*}}
+{center:{txt}{lalign 25:_cons}{res}{center 11:8.702}{res}{center 11:3.930}{res}{center 11:7.535}{res}{center 11:4.618}{res}{center 11:8.702}{res}{center 11:3.930}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.662)**}{res}{center 11:(2.000)*}{res}{center 11:(0.710)**}{res}{center 11:(1.169)**}{res}{center 11:(0.662)**}{res}{center 11:(2.000)*}}
+{center:{txt}{lalign 25:SER}{res}{center 11:0.55}{res}{center 11:0.08}{res}{center 11:0.53}{res}{center 11:0.47}{res}{center 11:0.55}{res}{center 11:0.08}}
+{center:{txt}{lalign 25:R^2}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}}
+{center:{txt}{lalign 25:Adjusted R^2}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{center:{txt}{lalign 25:N}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{txt}{center:{hline 93}}
+{txt}{center:* p<0.05; ** p<0.01}
+
+
+{com}. regress lnproperty CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, r
+
+{txt}Linear regression                               Number of obs     = {res}     1,254
+                                                {txt}F(10, 1243)       =  {res}   137.64
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.5340
+                                                {txt}Root MSE          =    {res} .69707
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 23}{c |}{col 35}    Robust
+{col 1}           lnproperty{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}CrimeFree {c |}{col 23}{res}{space 2}-.5714777{col 35}{space 2} .1046522{col 46}{space 1}   -5.46{col 55}{space 3}0.000{col 63}{space 4}-.7767921{col 76}{space 3}-.3661633
+{txt}{space 16}Black {c |}{col 23}{res}{space 2} .1108741{col 35}{space 2} .0571787{col 46}{space 1}    1.94{col 55}{space 3}0.053{col 63}{space 4}-.0013033{col 76}{space 3} .2230515
+{txt}{space 16}White {c |}{col 23}{res}{space 2}-1.136212{col 35}{space 2} .6910911{col 46}{space 1}   -1.64{col 55}{space 3}0.100{col 63}{space 4}-2.492046{col 76}{space 3} .2196218
+{txt}{space 14}AsianPI {c |}{col 23}{res}{space 2}-4.065937{col 35}{space 2} .8617532{col 46}{space 1}   -4.72{col 55}{space 3}0.000{col 63}{space 4}-5.756588{col 76}{space 3}-2.375286
+{txt}{space 13}Hispanic {c |}{col 23}{res}{space 2}-2.098213{col 35}{space 2} .1709169{col 46}{space 1}  -12.28{col 55}{space 3}0.000{col 63}{space 4}-2.433531{col 76}{space 3}-1.762896
+{txt}{space 15}single {c |}{col 23}{res}{space 2} 1.069215{col 35}{space 2} .3712343{col 46}{space 1}    2.88{col 55}{space 3}0.004{col 63}{space 4} .3408997{col 76}{space 3}  1.79753
+{txt}{space 16}multi {c |}{col 23}{res}{space 2} .0189022{col 35}{space 2}   .43221{col 46}{space 1}    0.04{col 55}{space 3}0.965{col 63}{space 4}-.8290394{col 76}{space 3} .8668438
+{txt}MedianHouseholdIncome {c |}{col 23}{res}{space 2} -.000015{col 35}{space 2} 2.84e-06{col 46}{space 1}   -5.28{col 55}{space 3}0.000{col 63}{space 4}-.0000206{col 76}{space 3}-9.43e-06
+{txt}{space 9}PovPerAge017 {c |}{col 23}{res}{space 2} .0800974{col 35}{space 2} .0086278{col 46}{space 1}    9.28{col 55}{space 3}0.000{col 63}{space 4} .0631708{col 76}{space 3}  .097024
+{txt}{space 8}PovPerAllAges {c |}{col 23}{res}{space 2}-.0729704{col 35}{space 2} .0117468{col 46}{space 1}   -6.21{col 55}{space 3}0.000{col 63}{space 4}-.0960162{col 76}{space 3}-.0499246
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}  7.53487{col 35}{space 2} .7103458{col 46}{space 1}   10.61{col 55}{space 3}0.000{col 63}{space 4} 6.141261{col 76}{space 3} 8.928479
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. outreg , ctitle("Crime 1997-2018",OLS P) summtitle("SER"\"R^2"\"Adjusted R^2"\"N") se merge
+{res}
+{txt}{center:{hline 104}}
+{center:{txt}{lalign 25:Violent Crime 1997-2018}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS P}}
+{txt}{center:{hline 104}}
+{center:{txt}{lalign 25:CrimeFree}{res}{center 11:-0.111}{res}{center 11:-0.155}{res}{center 11:-0.571}{res}{center 11:-0.087}{res}{center 11:-0.111}{res}{center 11:-0.155}{res}{center 11:-0.571}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.087)}{res}{center 11:(0.068)*}{res}{center 11:(0.105)**}{res}{center 11:(0.040)*}{res}{center 11:(0.087)}{res}{center 11:(0.068)*}{res}{center 11:(0.105)**}}
+{center:{txt}{lalign 25:Black}{res}{center 11:-0.082}{res}{center 11:-0.171}{res}{center 11:0.111}{res}{center 11:0.016}{res}{center 11:-0.082}{res}{center 11:-0.171}{res}{center 11:0.111}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.057)}{res}{center 11:(0.037)**}{res}{center 11:(0.057)}{res}{center 11:(0.022)}{res}{center 11:(0.057)}{res}{center 11:(0.037)**}{res}{center 11:(0.057)}}
+{center:{txt}{lalign 25:White}{res}{center 11:-4.032}{res}{center 11:0.860}{res}{center 11:-1.136}{res}{center 11:4.973}{res}{center 11:-4.032}{res}{center 11:0.860}{res}{center 11:-1.136}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.604)**}{res}{center 11:(1.304)}{res}{center 11:(0.691)}{res}{center 11:(0.762)**}{res}{center 11:(0.604)**}{res}{center 11:(1.304)}{res}{center 11:(0.691)}}
+{center:{txt}{lalign 25:AsianPI}{res}{center 11:-9.341}{res}{center 11:0.924}{res}{center 11:-4.066}{res}{center 11:2.604}{res}{center 11:-9.341}{res}{center 11:0.924}{res}{center 11:-4.066}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.740)**}{res}{center 11:(1.818)}{res}{center 11:(0.862)**}{res}{center 11:(1.062)*}{res}{center 11:(0.740)**}{res}{center 11:(1.818)}{res}{center 11:(0.862)**}}
+{center:{txt}{lalign 25:Hispanic}{res}{center 11:-0.939}{res}{center 11:-2.221}{res}{center 11:-2.098}{res}{center 11:-1.286}{res}{center 11:-0.939}{res}{center 11:-2.221}{res}{center 11:-2.098}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.167)**}{res}{center 11:(0.564)**}{res}{center 11:(0.171)**}{res}{center 11:(0.329)**}{res}{center 11:(0.167)**}{res}{center 11:(0.564)**}{res}{center 11:(0.171)**}}
+{center:{txt}{lalign 25:single}{res}{center 11:0.618}{res}{center 11:0.687}{res}{center 11:1.069}{res}{center 11:-1.262}{res}{center 11:0.618}{res}{center 11:0.687}{res}{center 11:1.069}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.337)}{res}{center 11:(1.309)}{res}{center 11:(0.371)**}{res}{center 11:(0.765)}{res}{center 11:(0.337)}{res}{center 11:(1.309)}{res}{center 11:(0.371)**}}
+{center:{txt}{lalign 25:multi}{res}{center 11:-1.492}{res}{center 11:1.508}{res}{center 11:0.019}{res}{center 11:-5.539}{res}{center 11:-1.492}{res}{center 11:1.508}{res}{center 11:0.019}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.365)**}{res}{center 11:(1.855)}{res}{center 11:(0.432)}{res}{center 11:(1.084)**}{res}{center 11:(0.365)**}{res}{center 11:(1.855)}{res}{center 11:(0.432)}}
+{center:{txt}{lalign 25:MedianHouseholdIncome}{res}{center 11:-0.000}{res}{center 11:0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}{res}{center 11:0.000}{res}{center 11:-0.000}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.000)*}{res}{center 11:(0.000)}{res}{center 11:(0.000)**}{res}{center 11:(0.000)**}{res}{center 11:(0.000)*}{res}{center 11:(0.000)}{res}{center 11:(0.000)**}}
+{center:{txt}{lalign 25:PovPerAge017}{res}{center 11:0.096}{res}{center 11:0.014}{res}{center 11:0.080}{res}{center 11:-0.004}{res}{center 11:0.096}{res}{center 11:0.014}{res}{center 11:0.080}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.009)**}{res}{center 11:(0.008)}{res}{center 11:(0.009)**}{res}{center 11:(0.005)}{res}{center 11:(0.009)**}{res}{center 11:(0.008)}{res}{center 11:(0.009)**}}
+{center:{txt}{lalign 25:PovPerAllAges}{res}{center 11:-0.101}{res}{center 11:-0.026}{res}{center 11:-0.073}{res}{center 11:0.000}{res}{center 11:-0.101}{res}{center 11:-0.026}{res}{center 11:-0.073}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.012)**}{res}{center 11:(0.012)*}{res}{center 11:(0.012)**}{res}{center 11:(0.007)}{res}{center 11:(0.012)**}{res}{center 11:(0.012)*}{res}{center 11:(0.012)**}}
+{center:{txt}{lalign 25:_cons}{res}{center 11:8.702}{res}{center 11:3.930}{res}{center 11:7.535}{res}{center 11:4.618}{res}{center 11:8.702}{res}{center 11:3.930}{res}{center 11:7.535}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.662)**}{res}{center 11:(2.000)*}{res}{center 11:(0.710)**}{res}{center 11:(1.169)**}{res}{center 11:(0.662)**}{res}{center 11:(2.000)*}{res}{center 11:(0.710)**}}
+{center:{txt}{lalign 25:SER}{res}{center 11:0.55}{res}{center 11:0.08}{res}{center 11:0.53}{res}{center 11:0.47}{res}{center 11:0.55}{res}{center 11:0.08}{res}{center 11:0.53}}
+{center:{txt}{lalign 25:R^2}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}}
+{center:{txt}{lalign 25:Adjusted R^2}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{center:{txt}{lalign 25:N}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{txt}{center:{hline 104}}
+{txt}{center:* p<0.05; ** p<0.01}
+
+
+{com}. xtset FIPScounty Year
+{res}{txt}{col 8}panel variable:  {res}FIPScounty (strongly balanced)
+{txt}{col 9}time variable:  {res}{col 25}Year, 1997 to 2018
+{txt}{col 17}delta:  {res}1 unit
+
+{com}. xtreg lnproperty CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, fe 
+{res}
+{txt}Fixed-effects (within) regression{col 49}Number of obs{col 67}={col 69}{res}     1,254
+{txt}Group variable: {res}FIPScounty{txt}{col 49}Number of groups{col 67}={col 69}{res}        57
+
+{txt}R-sq:{col 49}Obs per group:
+     within  = {res}0.4672{col 63}{txt}min{col 67}={col 69}{res}        22
+{txt}     between = {res}0.2954{col 63}{txt}avg{col 67}={col 69}{res}      22.0
+{txt}     overall = {res}0.3047{col 63}{txt}max{col 67}={col 69}{res}        22
+
+{txt}{col 49}F({res}10{txt},{res}1187{txt}){col 67}={col 70}{res}   104.09
+{txt}corr(u_i, Xb){col 16}= {res}-0.3091{txt}{col 49}Prob > F{col 67}={col 73}{res}0.0000
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           lnproperty{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}CrimeFree {c |}{col 23}{res}{space 2}-.0872279{col 35}{space 2} .0396958{col 46}{space 1}   -2.20{col 55}{space 3}0.028{col 63}{space 4}-.1651096{col 76}{space 3}-.0093462
+{txt}{space 16}Black {c |}{col 23}{res}{space 2} .0157931{col 35}{space 2} .0216863{col 46}{space 1}    0.73{col 55}{space 3}0.467{col 63}{space 4}-.0267547{col 76}{space 3} .0583409
+{txt}{space 16}White {c |}{col 23}{res}{space 2} 4.973129{col 35}{space 2} .7620811{col 46}{space 1}    6.53{col 55}{space 3}0.000{col 63}{space 4} 3.477953{col 76}{space 3} 6.468305
+{txt}{space 14}AsianPI {c |}{col 23}{res}{space 2} 2.603674{col 35}{space 2} 1.062389{col 46}{space 1}    2.45{col 55}{space 3}0.014{col 63}{space 4} .5193038{col 76}{space 3} 4.688044
+{txt}{space 13}Hispanic {c |}{col 23}{res}{space 2}-1.286043{col 35}{space 2} .3292511{col 46}{space 1}   -3.91{col 55}{space 3}0.000{col 63}{space 4}-1.932022{col 76}{space 3}-.6400641
+{txt}{space 15}single {c |}{col 23}{res}{space 2}-1.262255{col 35}{space 2} .7650693{col 46}{space 1}   -1.65{col 55}{space 3}0.099{col 63}{space 4}-2.763294{col 76}{space 3} .2387835
+{txt}{space 16}multi {c |}{col 23}{res}{space 2}-5.538594{col 35}{space 2} 1.084094{col 46}{space 1}   -5.11{col 55}{space 3}0.000{col 63}{space 4}-7.665548{col 76}{space 3}-3.411639
+{txt}MedianHouseholdIncome {c |}{col 23}{res}{space 2}-5.34e-06{col 35}{space 2} 1.52e-06{col 46}{space 1}   -3.52{col 55}{space 3}0.000{col 63}{space 4}-8.32e-06{col 76}{space 3}-2.36e-06
+{txt}{space 9}PovPerAge017 {c |}{col 23}{res}{space 2}-.0041774{col 35}{space 2} .0047698{col 46}{space 1}   -0.88{col 55}{space 3}0.381{col 63}{space 4}-.0135356{col 76}{space 3} .0051807
+{txt}{space 8}PovPerAllAges {c |}{col 23}{res}{space 2} .0003068{col 35}{space 2} .0071014{col 46}{space 1}    0.04{col 55}{space 3}0.966{col 63}{space 4}-.0136258{col 76}{space 3} .0142395
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2} 4.618158{col 35}{space 2} 1.168623{col 46}{space 1}    3.95{col 55}{space 3}0.000{col 63}{space 4}  2.32536{col 76}{space 3} 6.910955
+{txt}{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+              sigma_u {c |} {res} .87229552
+              {txt}sigma_e {c |} {res} .21195893
+                  {txt}rho {c |} {res} .94424779{txt}   (fraction of variance due to u_i)
+{hline 22}{c BT}{hline 64}
+F test that all u_i=0: F({res}56{txt}, {res}1187{txt}) = {res}218.87{col 62}{txt}Prob > F = {res}0.0000
+
+{com}. outreg , ctitle("Crime 1997-2018",FE P) summtitle("SER"\"R^2"\"Adjusted R^2"\"N") se merge 
+{res}
+{txt}{center:{hline 115}}
+{center:{txt}{lalign 25:Violent Crime 1997-2018}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS P}{txt}{center 11:FE P}}
+{txt}{center:{hline 115}}
+{center:{txt}{lalign 25:CrimeFree}{res}{center 11:-0.111}{res}{center 11:-0.155}{res}{center 11:-0.571}{res}{center 11:-0.087}{res}{center 11:-0.111}{res}{center 11:-0.155}{res}{center 11:-0.571}{res}{center 11:-0.087}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.087)}{res}{center 11:(0.068)*}{res}{center 11:(0.105)**}{res}{center 11:(0.040)*}{res}{center 11:(0.087)}{res}{center 11:(0.068)*}{res}{center 11:(0.105)**}{res}{center 11:(0.040)*}}
+{center:{txt}{lalign 25:Black}{res}{center 11:-0.082}{res}{center 11:-0.171}{res}{center 11:0.111}{res}{center 11:0.016}{res}{center 11:-0.082}{res}{center 11:-0.171}{res}{center 11:0.111}{res}{center 11:0.016}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.057)}{res}{center 11:(0.037)**}{res}{center 11:(0.057)}{res}{center 11:(0.022)}{res}{center 11:(0.057)}{res}{center 11:(0.037)**}{res}{center 11:(0.057)}{res}{center 11:(0.022)}}
+{center:{txt}{lalign 25:White}{res}{center 11:-4.032}{res}{center 11:0.860}{res}{center 11:-1.136}{res}{center 11:4.973}{res}{center 11:-4.032}{res}{center 11:0.860}{res}{center 11:-1.136}{res}{center 11:4.973}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.604)**}{res}{center 11:(1.304)}{res}{center 11:(0.691)}{res}{center 11:(0.762)**}{res}{center 11:(0.604)**}{res}{center 11:(1.304)}{res}{center 11:(0.691)}{res}{center 11:(0.762)**}}
+{center:{txt}{lalign 25:AsianPI}{res}{center 11:-9.341}{res}{center 11:0.924}{res}{center 11:-4.066}{res}{center 11:2.604}{res}{center 11:-9.341}{res}{center 11:0.924}{res}{center 11:-4.066}{res}{center 11:2.604}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.740)**}{res}{center 11:(1.818)}{res}{center 11:(0.862)**}{res}{center 11:(1.062)*}{res}{center 11:(0.740)**}{res}{center 11:(1.818)}{res}{center 11:(0.862)**}{res}{center 11:(1.062)*}}
+{center:{txt}{lalign 25:Hispanic}{res}{center 11:-0.939}{res}{center 11:-2.221}{res}{center 11:-2.098}{res}{center 11:-1.286}{res}{center 11:-0.939}{res}{center 11:-2.221}{res}{center 11:-2.098}{res}{center 11:-1.286}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.167)**}{res}{center 11:(0.564)**}{res}{center 11:(0.171)**}{res}{center 11:(0.329)**}{res}{center 11:(0.167)**}{res}{center 11:(0.564)**}{res}{center 11:(0.171)**}{res}{center 11:(0.329)**}}
+{center:{txt}{lalign 25:single}{res}{center 11:0.618}{res}{center 11:0.687}{res}{center 11:1.069}{res}{center 11:-1.262}{res}{center 11:0.618}{res}{center 11:0.687}{res}{center 11:1.069}{res}{center 11:-1.262}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.337)}{res}{center 11:(1.309)}{res}{center 11:(0.371)**}{res}{center 11:(0.765)}{res}{center 11:(0.337)}{res}{center 11:(1.309)}{res}{center 11:(0.371)**}{res}{center 11:(0.765)}}
+{center:{txt}{lalign 25:multi}{res}{center 11:-1.492}{res}{center 11:1.508}{res}{center 11:0.019}{res}{center 11:-5.539}{res}{center 11:-1.492}{res}{center 11:1.508}{res}{center 11:0.019}{res}{center 11:-5.539}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.365)**}{res}{center 11:(1.855)}{res}{center 11:(0.432)}{res}{center 11:(1.084)**}{res}{center 11:(0.365)**}{res}{center 11:(1.855)}{res}{center 11:(0.432)}{res}{center 11:(1.084)**}}
+{center:{txt}{lalign 25:MedianHouseholdIncome}{res}{center 11:-0.000}{res}{center 11:0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}{res}{center 11:0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.000)*}{res}{center 11:(0.000)}{res}{center 11:(0.000)**}{res}{center 11:(0.000)**}{res}{center 11:(0.000)*}{res}{center 11:(0.000)}{res}{center 11:(0.000)**}{res}{center 11:(0.000)**}}
+{center:{txt}{lalign 25:PovPerAge017}{res}{center 11:0.096}{res}{center 11:0.014}{res}{center 11:0.080}{res}{center 11:-0.004}{res}{center 11:0.096}{res}{center 11:0.014}{res}{center 11:0.080}{res}{center 11:-0.004}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.009)**}{res}{center 11:(0.008)}{res}{center 11:(0.009)**}{res}{center 11:(0.005)}{res}{center 11:(0.009)**}{res}{center 11:(0.008)}{res}{center 11:(0.009)**}{res}{center 11:(0.005)}}
+{center:{txt}{lalign 25:PovPerAllAges}{res}{center 11:-0.101}{res}{center 11:-0.026}{res}{center 11:-0.073}{res}{center 11:0.000}{res}{center 11:-0.101}{res}{center 11:-0.026}{res}{center 11:-0.073}{res}{center 11:0.000}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.012)**}{res}{center 11:(0.012)*}{res}{center 11:(0.012)**}{res}{center 11:(0.007)}{res}{center 11:(0.012)**}{res}{center 11:(0.012)*}{res}{center 11:(0.012)**}{res}{center 11:(0.007)}}
+{center:{txt}{lalign 25:_cons}{res}{center 11:8.702}{res}{center 11:3.930}{res}{center 11:7.535}{res}{center 11:4.618}{res}{center 11:8.702}{res}{center 11:3.930}{res}{center 11:7.535}{res}{center 11:4.618}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.662)**}{res}{center 11:(2.000)*}{res}{center 11:(0.710)**}{res}{center 11:(1.169)**}{res}{center 11:(0.662)**}{res}{center 11:(2.000)*}{res}{center 11:(0.710)**}{res}{center 11:(1.169)**}}
+{center:{txt}{lalign 25:SER}{res}{center 11:0.55}{res}{center 11:0.08}{res}{center 11:0.53}{res}{center 11:0.47}{res}{center 11:0.55}{res}{center 11:0.08}{res}{center 11:0.53}{res}{center 11:0.47}}
+{center:{txt}{lalign 25:R^2}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}}
+{center:{txt}{lalign 25:Adjusted R^2}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{center:{txt}{lalign 25:N}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{txt}{center:{hline 115}}
+{txt}{center:* p<0.05; ** p<0.01}
+
+
+{com}. regress lnviolent CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, r
+
+{txt}Linear regression                               Number of obs     = {res}     1,254
+                                                {txt}F(10, 1243)       =  {res}   142.97
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.5456
+                                                {txt}Root MSE          =    {res} .67093
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 23}{c |}{col 35}    Robust
+{col 1}            lnviolent{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}CrimeFree {c |}{col 23}{res}{space 2}-.1105152{col 35}{space 2} .0873426{col 46}{space 1}   -1.27{col 55}{space 3}0.206{col 63}{space 4}-.2818704{col 76}{space 3} .0608399
+{txt}{space 16}Black {c |}{col 23}{res}{space 2}-.0820284{col 35}{space 2} .0565257{col 46}{space 1}   -1.45{col 55}{space 3}0.147{col 63}{space 4}-.1929248{col 76}{space 3}  .028868
+{txt}{space 16}White {c |}{col 23}{res}{space 2}-4.032426{col 35}{space 2} .6040042{col 46}{space 1}   -6.68{col 55}{space 3}0.000{col 63}{space 4}-5.217406{col 76}{space 3}-2.847445
+{txt}{space 14}AsianPI {c |}{col 23}{res}{space 2}-9.340708{col 35}{space 2} .7402324{col 46}{space 1}  -12.62{col 55}{space 3}0.000{col 63}{space 4}-10.79295{col 76}{space 3}-7.888465
+{txt}{space 13}Hispanic {c |}{col 23}{res}{space 2}-.9391085{col 35}{space 2} .1671518{col 46}{space 1}   -5.62{col 55}{space 3}0.000{col 63}{space 4}-1.267039{col 76}{space 3}-.6111778
+{txt}{space 15}single {c |}{col 23}{res}{space 2} .6181416{col 35}{space 2} .3371702{col 46}{space 1}    1.83{col 55}{space 3}0.067{col 63}{space 4} -.043344{col 76}{space 3} 1.279627
+{txt}{space 16}multi {c |}{col 23}{res}{space 2}-1.491921{col 35}{space 2} .3654452{col 46}{space 1}   -4.08{col 55}{space 3}0.000{col 63}{space 4}-2.208879{col 76}{space 3} -.774964
+{txt}MedianHouseholdIncome {c |}{col 23}{res}{space 2}-5.73e-06{col 35}{space 2} 2.53e-06{col 46}{space 1}   -2.27{col 55}{space 3}0.024{col 63}{space 4}-.0000107{col 76}{space 3}-7.71e-07
+{txt}{space 9}PovPerAge017 {c |}{col 23}{res}{space 2} .0961317{col 35}{space 2} .0085586{col 46}{space 1}   11.23{col 55}{space 3}0.000{col 63}{space 4} .0793408{col 76}{space 3} .1129227
+{txt}{space 8}PovPerAllAges {c |}{col 23}{res}{space 2} -.100821{col 35}{space 2} .0122049{col 46}{space 1}   -8.26{col 55}{space 3}0.000{col 63}{space 4}-.1247654{col 76}{space 3}-.0768766
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2} 8.702026{col 35}{space 2} .6617075{col 46}{space 1}   13.15{col 55}{space 3}0.000{col 63}{space 4} 7.403839{col 76}{space 3} 10.00021
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. outreg , ctitle("Crime 1997-2018",OLS V) summtitle("SER"\"R^2"\"Adjusted R^2"\"N") se merge 
+{res}
+{txt}{center:{hline 126}}
+{center:{txt}{lalign 25:Violent Crime 1997-2018}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS P}{txt}{center 11:FE P}{txt}{center 11:OLS V}}
+{txt}{center:{hline 126}}
+{center:{txt}{lalign 25:CrimeFree}{res}{center 11:-0.111}{res}{center 11:-0.155}{res}{center 11:-0.571}{res}{center 11:-0.087}{res}{center 11:-0.111}{res}{center 11:-0.155}{res}{center 11:-0.571}{res}{center 11:-0.087}{res}{center 11:-0.111}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.087)}{res}{center 11:(0.068)*}{res}{center 11:(0.105)**}{res}{center 11:(0.040)*}{res}{center 11:(0.087)}{res}{center 11:(0.068)*}{res}{center 11:(0.105)**}{res}{center 11:(0.040)*}{res}{center 11:(0.087)}}
+{center:{txt}{lalign 25:Black}{res}{center 11:-0.082}{res}{center 11:-0.171}{res}{center 11:0.111}{res}{center 11:0.016}{res}{center 11:-0.082}{res}{center 11:-0.171}{res}{center 11:0.111}{res}{center 11:0.016}{res}{center 11:-0.082}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.057)}{res}{center 11:(0.037)**}{res}{center 11:(0.057)}{res}{center 11:(0.022)}{res}{center 11:(0.057)}{res}{center 11:(0.037)**}{res}{center 11:(0.057)}{res}{center 11:(0.022)}{res}{center 11:(0.057)}}
+{center:{txt}{lalign 25:White}{res}{center 11:-4.032}{res}{center 11:0.860}{res}{center 11:-1.136}{res}{center 11:4.973}{res}{center 11:-4.032}{res}{center 11:0.860}{res}{center 11:-1.136}{res}{center 11:4.973}{res}{center 11:-4.032}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.604)**}{res}{center 11:(1.304)}{res}{center 11:(0.691)}{res}{center 11:(0.762)**}{res}{center 11:(0.604)**}{res}{center 11:(1.304)}{res}{center 11:(0.691)}{res}{center 11:(0.762)**}{res}{center 11:(0.604)**}}
+{center:{txt}{lalign 25:AsianPI}{res}{center 11:-9.341}{res}{center 11:0.924}{res}{center 11:-4.066}{res}{center 11:2.604}{res}{center 11:-9.341}{res}{center 11:0.924}{res}{center 11:-4.066}{res}{center 11:2.604}{res}{center 11:-9.341}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.740)**}{res}{center 11:(1.818)}{res}{center 11:(0.862)**}{res}{center 11:(1.062)*}{res}{center 11:(0.740)**}{res}{center 11:(1.818)}{res}{center 11:(0.862)**}{res}{center 11:(1.062)*}{res}{center 11:(0.740)**}}
+{center:{txt}{lalign 25:Hispanic}{res}{center 11:-0.939}{res}{center 11:-2.221}{res}{center 11:-2.098}{res}{center 11:-1.286}{res}{center 11:-0.939}{res}{center 11:-2.221}{res}{center 11:-2.098}{res}{center 11:-1.286}{res}{center 11:-0.939}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.167)**}{res}{center 11:(0.564)**}{res}{center 11:(0.171)**}{res}{center 11:(0.329)**}{res}{center 11:(0.167)**}{res}{center 11:(0.564)**}{res}{center 11:(0.171)**}{res}{center 11:(0.329)**}{res}{center 11:(0.167)**}}
+{center:{txt}{lalign 25:single}{res}{center 11:0.618}{res}{center 11:0.687}{res}{center 11:1.069}{res}{center 11:-1.262}{res}{center 11:0.618}{res}{center 11:0.687}{res}{center 11:1.069}{res}{center 11:-1.262}{res}{center 11:0.618}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.337)}{res}{center 11:(1.309)}{res}{center 11:(0.371)**}{res}{center 11:(0.765)}{res}{center 11:(0.337)}{res}{center 11:(1.309)}{res}{center 11:(0.371)**}{res}{center 11:(0.765)}{res}{center 11:(0.337)}}
+{center:{txt}{lalign 25:multi}{res}{center 11:-1.492}{res}{center 11:1.508}{res}{center 11:0.019}{res}{center 11:-5.539}{res}{center 11:-1.492}{res}{center 11:1.508}{res}{center 11:0.019}{res}{center 11:-5.539}{res}{center 11:-1.492}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.365)**}{res}{center 11:(1.855)}{res}{center 11:(0.432)}{res}{center 11:(1.084)**}{res}{center 11:(0.365)**}{res}{center 11:(1.855)}{res}{center 11:(0.432)}{res}{center 11:(1.084)**}{res}{center 11:(0.365)**}}
+{center:{txt}{lalign 25:MedianHouseholdIncome}{res}{center 11:-0.000}{res}{center 11:0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}{res}{center 11:0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.000)*}{res}{center 11:(0.000)}{res}{center 11:(0.000)**}{res}{center 11:(0.000)**}{res}{center 11:(0.000)*}{res}{center 11:(0.000)}{res}{center 11:(0.000)**}{res}{center 11:(0.000)**}{res}{center 11:(0.000)*}}
+{center:{txt}{lalign 25:PovPerAge017}{res}{center 11:0.096}{res}{center 11:0.014}{res}{center 11:0.080}{res}{center 11:-0.004}{res}{center 11:0.096}{res}{center 11:0.014}{res}{center 11:0.080}{res}{center 11:-0.004}{res}{center 11:0.096}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.009)**}{res}{center 11:(0.008)}{res}{center 11:(0.009)**}{res}{center 11:(0.005)}{res}{center 11:(0.009)**}{res}{center 11:(0.008)}{res}{center 11:(0.009)**}{res}{center 11:(0.005)}{res}{center 11:(0.009)**}}
+{center:{txt}{lalign 25:PovPerAllAges}{res}{center 11:-0.101}{res}{center 11:-0.026}{res}{center 11:-0.073}{res}{center 11:0.000}{res}{center 11:-0.101}{res}{center 11:-0.026}{res}{center 11:-0.073}{res}{center 11:0.000}{res}{center 11:-0.101}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.012)**}{res}{center 11:(0.012)*}{res}{center 11:(0.012)**}{res}{center 11:(0.007)}{res}{center 11:(0.012)**}{res}{center 11:(0.012)*}{res}{center 11:(0.012)**}{res}{center 11:(0.007)}{res}{center 11:(0.012)**}}
+{center:{txt}{lalign 25:_cons}{res}{center 11:8.702}{res}{center 11:3.930}{res}{center 11:7.535}{res}{center 11:4.618}{res}{center 11:8.702}{res}{center 11:3.930}{res}{center 11:7.535}{res}{center 11:4.618}{res}{center 11:8.702}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.662)**}{res}{center 11:(2.000)*}{res}{center 11:(0.710)**}{res}{center 11:(1.169)**}{res}{center 11:(0.662)**}{res}{center 11:(2.000)*}{res}{center 11:(0.710)**}{res}{center 11:(1.169)**}{res}{center 11:(0.662)**}}
+{center:{txt}{lalign 25:SER}{res}{center 11:0.55}{res}{center 11:0.08}{res}{center 11:0.53}{res}{center 11:0.47}{res}{center 11:0.55}{res}{center 11:0.08}{res}{center 11:0.53}{res}{center 11:0.47}{res}{center 11:0.55}}
+{center:{txt}{lalign 25:R^2}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}}
+{center:{txt}{lalign 25:Adjusted R^2}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{center:{txt}{lalign 25:N}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{txt}{center:{hline 126}}
+{txt}{center:* p<0.05; ** p<0.01}
+
+
+{com}. xtset FIPScounty Year
+{res}{txt}{col 8}panel variable:  {res}FIPScounty (strongly balanced)
+{txt}{col 9}time variable:  {res}{col 25}Year, 1997 to 2018
+{txt}{col 17}delta:  {res}1 unit
+
+{com}. xtreg lnviolent CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, fe
+{res}
+{txt}Fixed-effects (within) regression{col 49}Number of obs{col 67}={col 69}{res}     1,254
+{txt}Group variable: {res}FIPScounty{txt}{col 49}Number of groups{col 67}={col 69}{res}        57
+
+{txt}R-sq:{col 49}Obs per group:
+     within  = {res}0.0834{col 63}{txt}min{col 67}={col 69}{res}        22
+{txt}     between = {res}0.0013{col 63}{txt}avg{col 67}={col 69}{res}      22.0
+{txt}     overall = {res}0.0038{col 63}{txt}max{col 67}={col 69}{res}        22
+
+{txt}{col 49}F({res}10{txt},{res}1187{txt}){col 67}={col 70}{res}    10.80
+{txt}corr(u_i, Xb){col 16}= {res}-0.3294{txt}{col 49}Prob > F{col 67}={col 73}{res}0.0000
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}            lnviolent{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}CrimeFree {c |}{col 23}{res}{space 2}-.1551389{col 35}{space 2} .0679404{col 46}{space 1}   -2.28{col 55}{space 3}0.023{col 63}{space 4}-.2884355{col 76}{space 3}-.0218424
+{txt}{space 16}Black {c |}{col 23}{res}{space 2}-.1708705{col 35}{space 2} .0371167{col 46}{space 1}   -4.60{col 55}{space 3}0.000{col 63}{space 4}-.2436922{col 76}{space 3}-.0980488
+{txt}{space 16}White {c |}{col 23}{res}{space 2} .8597326{col 35}{space 2} 1.304321{col 46}{space 1}    0.66{col 55}{space 3}0.510{col 63}{space 4}  -1.6993{col 76}{space 3} 3.418765
+{txt}{space 14}AsianPI {c |}{col 23}{res}{space 2} .9238348{col 35}{space 2} 1.818307{col 46}{space 1}    0.51{col 55}{space 3}0.611{col 63}{space 4}-2.643618{col 76}{space 3} 4.491288
+{txt}{space 13}Hispanic {c |}{col 23}{res}{space 2}-2.220543{col 35}{space 2} .5635218{col 46}{space 1}   -3.94{col 55}{space 3}0.000{col 63}{space 4}-3.326152{col 76}{space 3}-1.114933
+{txt}{space 15}single {c |}{col 23}{res}{space 2} .6865124{col 35}{space 2} 1.309436{col 46}{space 1}    0.52{col 55}{space 3}0.600{col 63}{space 4}-1.882554{col 76}{space 3} 3.255579
+{txt}{space 16}multi {c |}{col 23}{res}{space 2} 1.507624{col 35}{space 2} 1.855455{col 46}{space 1}    0.81{col 55}{space 3}0.417{col 63}{space 4}-2.132713{col 76}{space 3} 5.147962
+{txt}MedianHouseholdIncome {c |}{col 23}{res}{space 2} 5.04e-07{col 35}{space 2} 2.60e-06{col 46}{space 1}    0.19{col 55}{space 3}0.846{col 63}{space 4}-4.59e-06{col 76}{space 3} 5.60e-06
+{txt}{space 9}PovPerAge017 {c |}{col 23}{res}{space 2} .0140705{col 35}{space 2} .0081636{col 46}{space 1}    1.72{col 55}{space 3}0.085{col 63}{space 4}-.0019462{col 76}{space 3} .0300873
+{txt}{space 8}PovPerAllAges {c |}{col 23}{res}{space 2}-.0258641{col 35}{space 2} .0121542{col 46}{space 1}   -2.13{col 55}{space 3}0.034{col 63}{space 4}-.0497102{col 76}{space 3}-.0020181
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2} 3.929578{col 35}{space 2} 2.000129{col 46}{space 1}    1.96{col 55}{space 3}0.050{col 63}{space 4} .0053957{col 76}{space 3}  7.85376
+{txt}{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+              sigma_u {c |} {res} .98726023
+              {txt}sigma_e {c |} {res} .36277317
+                  {txt}rho {c |} {res} .88103959{txt}   (fraction of variance due to u_i)
+{hline 22}{c BT}{hline 64}
+F test that all u_i=0: F({res}56{txt}, {res}1187{txt}) = {res}54.72{col 62}{txt}Prob > F = {res}0.0000
+
+{com}. outreg , ctitle("Crime 1997-2018",FE V) summtitle("SER"\"R^2"\"Adjusted R^2"\"N") se merge 
+{res}
+{txt}{center:{hline 137}}
+{center:{txt}{lalign 25:Violent Crime 1997-2018}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS}{txt}{center 11:FE}{txt}{center 11:OLS P}{txt}{center 11:FE P}{txt}{center 11:OLS V}{txt}{center 11:FE V}}
+{txt}{center:{hline 137}}
+{center:{txt}{lalign 25:CrimeFree}{res}{center 11:-0.111}{res}{center 11:-0.155}{res}{center 11:-0.571}{res}{center 11:-0.087}{res}{center 11:-0.111}{res}{center 11:-0.155}{res}{center 11:-0.571}{res}{center 11:-0.087}{res}{center 11:-0.111}{res}{center 11:-0.155}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.087)}{res}{center 11:(0.068)*}{res}{center 11:(0.105)**}{res}{center 11:(0.040)*}{res}{center 11:(0.087)}{res}{center 11:(0.068)*}{res}{center 11:(0.105)**}{res}{center 11:(0.040)*}{res}{center 11:(0.087)}{res}{center 11:(0.068)*}}
+{center:{txt}{lalign 25:Black}{res}{center 11:-0.082}{res}{center 11:-0.171}{res}{center 11:0.111}{res}{center 11:0.016}{res}{center 11:-0.082}{res}{center 11:-0.171}{res}{center 11:0.111}{res}{center 11:0.016}{res}{center 11:-0.082}{res}{center 11:-0.171}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.057)}{res}{center 11:(0.037)**}{res}{center 11:(0.057)}{res}{center 11:(0.022)}{res}{center 11:(0.057)}{res}{center 11:(0.037)**}{res}{center 11:(0.057)}{res}{center 11:(0.022)}{res}{center 11:(0.057)}{res}{center 11:(0.037)**}}
+{center:{txt}{lalign 25:White}{res}{center 11:-4.032}{res}{center 11:0.860}{res}{center 11:-1.136}{res}{center 11:4.973}{res}{center 11:-4.032}{res}{center 11:0.860}{res}{center 11:-1.136}{res}{center 11:4.973}{res}{center 11:-4.032}{res}{center 11:0.860}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.604)**}{res}{center 11:(1.304)}{res}{center 11:(0.691)}{res}{center 11:(0.762)**}{res}{center 11:(0.604)**}{res}{center 11:(1.304)}{res}{center 11:(0.691)}{res}{center 11:(0.762)**}{res}{center 11:(0.604)**}{res}{center 11:(1.304)}}
+{center:{txt}{lalign 25:AsianPI}{res}{center 11:-9.341}{res}{center 11:0.924}{res}{center 11:-4.066}{res}{center 11:2.604}{res}{center 11:-9.341}{res}{center 11:0.924}{res}{center 11:-4.066}{res}{center 11:2.604}{res}{center 11:-9.341}{res}{center 11:0.924}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.740)**}{res}{center 11:(1.818)}{res}{center 11:(0.862)**}{res}{center 11:(1.062)*}{res}{center 11:(0.740)**}{res}{center 11:(1.818)}{res}{center 11:(0.862)**}{res}{center 11:(1.062)*}{res}{center 11:(0.740)**}{res}{center 11:(1.818)}}
+{center:{txt}{lalign 25:Hispanic}{res}{center 11:-0.939}{res}{center 11:-2.221}{res}{center 11:-2.098}{res}{center 11:-1.286}{res}{center 11:-0.939}{res}{center 11:-2.221}{res}{center 11:-2.098}{res}{center 11:-1.286}{res}{center 11:-0.939}{res}{center 11:-2.221}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.167)**}{res}{center 11:(0.564)**}{res}{center 11:(0.171)**}{res}{center 11:(0.329)**}{res}{center 11:(0.167)**}{res}{center 11:(0.564)**}{res}{center 11:(0.171)**}{res}{center 11:(0.329)**}{res}{center 11:(0.167)**}{res}{center 11:(0.564)**}}
+{center:{txt}{lalign 25:single}{res}{center 11:0.618}{res}{center 11:0.687}{res}{center 11:1.069}{res}{center 11:-1.262}{res}{center 11:0.618}{res}{center 11:0.687}{res}{center 11:1.069}{res}{center 11:-1.262}{res}{center 11:0.618}{res}{center 11:0.687}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.337)}{res}{center 11:(1.309)}{res}{center 11:(0.371)**}{res}{center 11:(0.765)}{res}{center 11:(0.337)}{res}{center 11:(1.309)}{res}{center 11:(0.371)**}{res}{center 11:(0.765)}{res}{center 11:(0.337)}{res}{center 11:(1.309)}}
+{center:{txt}{lalign 25:multi}{res}{center 11:-1.492}{res}{center 11:1.508}{res}{center 11:0.019}{res}{center 11:-5.539}{res}{center 11:-1.492}{res}{center 11:1.508}{res}{center 11:0.019}{res}{center 11:-5.539}{res}{center 11:-1.492}{res}{center 11:1.508}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.365)**}{res}{center 11:(1.855)}{res}{center 11:(0.432)}{res}{center 11:(1.084)**}{res}{center 11:(0.365)**}{res}{center 11:(1.855)}{res}{center 11:(0.432)}{res}{center 11:(1.084)**}{res}{center 11:(0.365)**}{res}{center 11:(1.855)}}
+{center:{txt}{lalign 25:MedianHouseholdIncome}{res}{center 11:-0.000}{res}{center 11:0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}{res}{center 11:0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}{res}{center 11:0.000}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.000)*}{res}{center 11:(0.000)}{res}{center 11:(0.000)**}{res}{center 11:(0.000)**}{res}{center 11:(0.000)*}{res}{center 11:(0.000)}{res}{center 11:(0.000)**}{res}{center 11:(0.000)**}{res}{center 11:(0.000)*}{res}{center 11:(0.000)}}
+{center:{txt}{lalign 25:PovPerAge017}{res}{center 11:0.096}{res}{center 11:0.014}{res}{center 11:0.080}{res}{center 11:-0.004}{res}{center 11:0.096}{res}{center 11:0.014}{res}{center 11:0.080}{res}{center 11:-0.004}{res}{center 11:0.096}{res}{center 11:0.014}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.009)**}{res}{center 11:(0.008)}{res}{center 11:(0.009)**}{res}{center 11:(0.005)}{res}{center 11:(0.009)**}{res}{center 11:(0.008)}{res}{center 11:(0.009)**}{res}{center 11:(0.005)}{res}{center 11:(0.009)**}{res}{center 11:(0.008)}}
+{center:{txt}{lalign 25:PovPerAllAges}{res}{center 11:-0.101}{res}{center 11:-0.026}{res}{center 11:-0.073}{res}{center 11:0.000}{res}{center 11:-0.101}{res}{center 11:-0.026}{res}{center 11:-0.073}{res}{center 11:0.000}{res}{center 11:-0.101}{res}{center 11:-0.026}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.012)**}{res}{center 11:(0.012)*}{res}{center 11:(0.012)**}{res}{center 11:(0.007)}{res}{center 11:(0.012)**}{res}{center 11:(0.012)*}{res}{center 11:(0.012)**}{res}{center 11:(0.007)}{res}{center 11:(0.012)**}{res}{center 11:(0.012)*}}
+{center:{txt}{lalign 25:_cons}{res}{center 11:8.702}{res}{center 11:3.930}{res}{center 11:7.535}{res}{center 11:4.618}{res}{center 11:8.702}{res}{center 11:3.930}{res}{center 11:7.535}{res}{center 11:4.618}{res}{center 11:8.702}{res}{center 11:3.930}}
+{center:{txt}{lalign 25:}{res}{center 11:(0.662)**}{res}{center 11:(2.000)*}{res}{center 11:(0.710)**}{res}{center 11:(1.169)**}{res}{center 11:(0.662)**}{res}{center 11:(2.000)*}{res}{center 11:(0.710)**}{res}{center 11:(1.169)**}{res}{center 11:(0.662)**}{res}{center 11:(2.000)*}}
+{center:{txt}{lalign 25:SER}{res}{center 11:0.55}{res}{center 11:0.08}{res}{center 11:0.53}{res}{center 11:0.47}{res}{center 11:0.55}{res}{center 11:0.08}{res}{center 11:0.53}{res}{center 11:0.47}{res}{center 11:0.55}{res}{center 11:0.08}}
+{center:{txt}{lalign 25:R^2}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}}
+{center:{txt}{lalign 25:Adjusted R^2}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{center:{txt}{lalign 25:N}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{txt}{center:{hline 137}}
+{txt}{center:* p<0.05; ** p<0.01}
+
+
+{com}. regress lnproperty CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, r
+
+{txt}Linear regression                               Number of obs     = {res}     1,254
+                                                {txt}F(10, 1243)       =  {res}   137.64
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.5340
+                                                {txt}Root MSE          =    {res} .69707
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 23}{c |}{col 35}    Robust
+{col 1}           lnproperty{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}CrimeFree {c |}{col 23}{res}{space 2}-.5714777{col 35}{space 2} .1046522{col 46}{space 1}   -5.46{col 55}{space 3}0.000{col 63}{space 4}-.7767921{col 76}{space 3}-.3661633
+{txt}{space 16}Black {c |}{col 23}{res}{space 2} .1108741{col 35}{space 2} .0571787{col 46}{space 1}    1.94{col 55}{space 3}0.053{col 63}{space 4}-.0013033{col 76}{space 3} .2230515
+{txt}{space 16}White {c |}{col 23}{res}{space 2}-1.136212{col 35}{space 2} .6910911{col 46}{space 1}   -1.64{col 55}{space 3}0.100{col 63}{space 4}-2.492046{col 76}{space 3} .2196218
+{txt}{space 14}AsianPI {c |}{col 23}{res}{space 2}-4.065937{col 35}{space 2} .8617532{col 46}{space 1}   -4.72{col 55}{space 3}0.000{col 63}{space 4}-5.756588{col 76}{space 3}-2.375286
+{txt}{space 13}Hispanic {c |}{col 23}{res}{space 2}-2.098213{col 35}{space 2} .1709169{col 46}{space 1}  -12.28{col 55}{space 3}0.000{col 63}{space 4}-2.433531{col 76}{space 3}-1.762896
+{txt}{space 15}single {c |}{col 23}{res}{space 2} 1.069215{col 35}{space 2} .3712343{col 46}{space 1}    2.88{col 55}{space 3}0.004{col 63}{space 4} .3408997{col 76}{space 3}  1.79753
+{txt}{space 16}multi {c |}{col 23}{res}{space 2} .0189022{col 35}{space 2}   .43221{col 46}{space 1}    0.04{col 55}{space 3}0.965{col 63}{space 4}-.8290394{col 76}{space 3} .8668438
+{txt}MedianHouseholdIncome {c |}{col 23}{res}{space 2} -.000015{col 35}{space 2} 2.84e-06{col 46}{space 1}   -5.28{col 55}{space 3}0.000{col 63}{space 4}-.0000206{col 76}{space 3}-9.43e-06
+{txt}{space 9}PovPerAge017 {c |}{col 23}{res}{space 2} .0800974{col 35}{space 2} .0086278{col 46}{space 1}    9.28{col 55}{space 3}0.000{col 63}{space 4} .0631708{col 76}{space 3}  .097024
+{txt}{space 8}PovPerAllAges {c |}{col 23}{res}{space 2}-.0729704{col 35}{space 2} .0117468{col 46}{space 1}   -6.21{col 55}{space 3}0.000{col 63}{space 4}-.0960162{col 76}{space 3}-.0499246
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2}  7.53487{col 35}{space 2} .7103458{col 46}{space 1}   10.61{col 55}{space 3}0.000{col 63}{space 4} 6.141261{col 76}{space 3} 8.928479
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. outreg , ctitle("Crime 1997-2018",OLS P) summtitle("SER"\"R^2"\"Adjusted R^2"\"N") se
+{res}
+{txt}{center:{hline 36}}
+{center:{txt}{lalign 23:Crime 1997-2018}{txt}{center 11:OLS P}}
+{txt}{center:{hline 36}}
+{center:{txt}{lalign 23:CrimeFree}{res}{center 11:-0.571}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.105)**}}
+{center:{txt}{lalign 23:Black}{res}{center 11:0.111}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.057)}}
+{center:{txt}{lalign 23:White}{res}{center 11:-1.136}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.691)}}
+{center:{txt}{lalign 23:AsianPI}{res}{center 11:-4.066}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.862)**}}
+{center:{txt}{lalign 23:Hispanic}{res}{center 11:-2.098}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.171)**}}
+{center:{txt}{lalign 23:single}{res}{center 11:1.069}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.371)**}}
+{center:{txt}{lalign 23:multi}{res}{center 11:0.019}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.432)}}
+{center:{txt}{lalign 23:MedianHouseholdIncome}{res}{center 11:-0.000}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.000)**}}
+{center:{txt}{lalign 23:PovPerAge017}{res}{center 11:0.080}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.009)**}}
+{center:{txt}{lalign 23:PovPerAllAges}{res}{center 11:-0.073}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.012)**}}
+{center:{txt}{lalign 23:_cons}{res}{center 11:7.535}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.710)**}}
+{center:{txt}{lalign 23:SER}{res}{center 11:0.53}}
+{center:{txt}{lalign 23:R^2}{res}{center 11:1,254}}
+{center:{txt}{lalign 23:Adjusted R^2}{res}{center 11:}}
+{center:{txt}{lalign 23:N}{res}{center 11:}}
+{txt}{center:{hline 36}}
+{txt}{center:* p<0.05; ** p<0.01}
+
+
+{com}. regress lnviolent CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, r
+
+{txt}Linear regression                               Number of obs     = {res}     1,254
+                                                {txt}F(10, 1243)       =  {res}   142.97
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.5456
+                                                {txt}Root MSE          =    {res} .67093
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 23}{c |}{col 35}    Robust
+{col 1}            lnviolent{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}CrimeFree {c |}{col 23}{res}{space 2}-.1105152{col 35}{space 2} .0873426{col 46}{space 1}   -1.27{col 55}{space 3}0.206{col 63}{space 4}-.2818704{col 76}{space 3} .0608399
+{txt}{space 16}Black {c |}{col 23}{res}{space 2}-.0820284{col 35}{space 2} .0565257{col 46}{space 1}   -1.45{col 55}{space 3}0.147{col 63}{space 4}-.1929248{col 76}{space 3}  .028868
+{txt}{space 16}White {c |}{col 23}{res}{space 2}-4.032426{col 35}{space 2} .6040042{col 46}{space 1}   -6.68{col 55}{space 3}0.000{col 63}{space 4}-5.217406{col 76}{space 3}-2.847445
+{txt}{space 14}AsianPI {c |}{col 23}{res}{space 2}-9.340708{col 35}{space 2} .7402324{col 46}{space 1}  -12.62{col 55}{space 3}0.000{col 63}{space 4}-10.79295{col 76}{space 3}-7.888465
+{txt}{space 13}Hispanic {c |}{col 23}{res}{space 2}-.9391085{col 35}{space 2} .1671518{col 46}{space 1}   -5.62{col 55}{space 3}0.000{col 63}{space 4}-1.267039{col 76}{space 3}-.6111778
+{txt}{space 15}single {c |}{col 23}{res}{space 2} .6181416{col 35}{space 2} .3371702{col 46}{space 1}    1.83{col 55}{space 3}0.067{col 63}{space 4} -.043344{col 76}{space 3} 1.279627
+{txt}{space 16}multi {c |}{col 23}{res}{space 2}-1.491921{col 35}{space 2} .3654452{col 46}{space 1}   -4.08{col 55}{space 3}0.000{col 63}{space 4}-2.208879{col 76}{space 3} -.774964
+{txt}MedianHouseholdIncome {c |}{col 23}{res}{space 2}-5.73e-06{col 35}{space 2} 2.53e-06{col 46}{space 1}   -2.27{col 55}{space 3}0.024{col 63}{space 4}-.0000107{col 76}{space 3}-7.71e-07
+{txt}{space 9}PovPerAge017 {c |}{col 23}{res}{space 2} .0961317{col 35}{space 2} .0085586{col 46}{space 1}   11.23{col 55}{space 3}0.000{col 63}{space 4} .0793408{col 76}{space 3} .1129227
+{txt}{space 8}PovPerAllAges {c |}{col 23}{res}{space 2} -.100821{col 35}{space 2} .0122049{col 46}{space 1}   -8.26{col 55}{space 3}0.000{col 63}{space 4}-.1247654{col 76}{space 3}-.0768766
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2} 8.702026{col 35}{space 2} .6617075{col 46}{space 1}   13.15{col 55}{space 3}0.000{col 63}{space 4} 7.403839{col 76}{space 3} 10.00021
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. outreg , ctitle("Crime 1997-2018",OLS V) summtitle("SER"\"R^2"\"Adjusted R^2"\"N") se merge 
+{res}
+{txt}{center:{hline 47}}
+{center:{txt}{lalign 23:Crime 1997-2018}{txt}{center 11:OLS P}{txt}{center 11:OLS V}}
+{txt}{center:{hline 47}}
+{center:{txt}{lalign 23:CrimeFree}{res}{center 11:-0.571}{res}{center 11:-0.111}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.105)**}{res}{center 11:(0.087)}}
+{center:{txt}{lalign 23:Black}{res}{center 11:0.111}{res}{center 11:-0.082}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.057)}{res}{center 11:(0.057)}}
+{center:{txt}{lalign 23:White}{res}{center 11:-1.136}{res}{center 11:-4.032}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.691)}{res}{center 11:(0.604)**}}
+{center:{txt}{lalign 23:AsianPI}{res}{center 11:-4.066}{res}{center 11:-9.341}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.862)**}{res}{center 11:(0.740)**}}
+{center:{txt}{lalign 23:Hispanic}{res}{center 11:-2.098}{res}{center 11:-0.939}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.171)**}{res}{center 11:(0.167)**}}
+{center:{txt}{lalign 23:single}{res}{center 11:1.069}{res}{center 11:0.618}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.371)**}{res}{center 11:(0.337)}}
+{center:{txt}{lalign 23:multi}{res}{center 11:0.019}{res}{center 11:-1.492}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.432)}{res}{center 11:(0.365)**}}
+{center:{txt}{lalign 23:MedianHouseholdIncome}{res}{center 11:-0.000}{res}{center 11:-0.000}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.000)**}{res}{center 11:(0.000)*}}
+{center:{txt}{lalign 23:PovPerAge017}{res}{center 11:0.080}{res}{center 11:0.096}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.009)**}{res}{center 11:(0.009)**}}
+{center:{txt}{lalign 23:PovPerAllAges}{res}{center 11:-0.073}{res}{center 11:-0.101}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.012)**}{res}{center 11:(0.012)**}}
+{center:{txt}{lalign 23:_cons}{res}{center 11:7.535}{res}{center 11:8.702}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.710)**}{res}{center 11:(0.662)**}}
+{center:{txt}{lalign 23:SER}{res}{center 11:0.53}{res}{center 11:0.55}}
+{center:{txt}{lalign 23:R^2}{res}{center 11:1,254}{res}{center 11:1,254}}
+{center:{txt}{lalign 23:Adjusted R^2}{res}{center 11:}{res}{center 11:}}
+{center:{txt}{lalign 23:N}{res}{center 11:}{res}{center 11:}}
+{txt}{center:{hline 47}}
+{txt}{center:* p<0.05; ** p<0.01}
+
+
+{com}. xtset FIPScounty Year
+{res}{txt}{col 8}panel variable:  {res}FIPScounty (strongly balanced)
+{txt}{col 9}time variable:  {res}{col 25}Year, 1997 to 2018
+{txt}{col 17}delta:  {res}1 unit
+
+{com}. xtreg lnproperty CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, fe 
+{res}
+{txt}Fixed-effects (within) regression{col 49}Number of obs{col 67}={col 69}{res}     1,254
+{txt}Group variable: {res}FIPScounty{txt}{col 49}Number of groups{col 67}={col 69}{res}        57
+
+{txt}R-sq:{col 49}Obs per group:
+     within  = {res}0.4672{col 63}{txt}min{col 67}={col 69}{res}        22
+{txt}     between = {res}0.2954{col 63}{txt}avg{col 67}={col 69}{res}      22.0
+{txt}     overall = {res}0.3047{col 63}{txt}max{col 67}={col 69}{res}        22
+
+{txt}{col 49}F({res}10{txt},{res}1187{txt}){col 67}={col 70}{res}   104.09
+{txt}corr(u_i, Xb){col 16}= {res}-0.3091{txt}{col 49}Prob > F{col 67}={col 73}{res}0.0000
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           lnproperty{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}CrimeFree {c |}{col 23}{res}{space 2}-.0872279{col 35}{space 2} .0396958{col 46}{space 1}   -2.20{col 55}{space 3}0.028{col 63}{space 4}-.1651096{col 76}{space 3}-.0093462
+{txt}{space 16}Black {c |}{col 23}{res}{space 2} .0157931{col 35}{space 2} .0216863{col 46}{space 1}    0.73{col 55}{space 3}0.467{col 63}{space 4}-.0267547{col 76}{space 3} .0583409
+{txt}{space 16}White {c |}{col 23}{res}{space 2} 4.973129{col 35}{space 2} .7620811{col 46}{space 1}    6.53{col 55}{space 3}0.000{col 63}{space 4} 3.477953{col 76}{space 3} 6.468305
+{txt}{space 14}AsianPI {c |}{col 23}{res}{space 2} 2.603674{col 35}{space 2} 1.062389{col 46}{space 1}    2.45{col 55}{space 3}0.014{col 63}{space 4} .5193038{col 76}{space 3} 4.688044
+{txt}{space 13}Hispanic {c |}{col 23}{res}{space 2}-1.286043{col 35}{space 2} .3292511{col 46}{space 1}   -3.91{col 55}{space 3}0.000{col 63}{space 4}-1.932022{col 76}{space 3}-.6400641
+{txt}{space 15}single {c |}{col 23}{res}{space 2}-1.262255{col 35}{space 2} .7650693{col 46}{space 1}   -1.65{col 55}{space 3}0.099{col 63}{space 4}-2.763294{col 76}{space 3} .2387835
+{txt}{space 16}multi {c |}{col 23}{res}{space 2}-5.538594{col 35}{space 2} 1.084094{col 46}{space 1}   -5.11{col 55}{space 3}0.000{col 63}{space 4}-7.665548{col 76}{space 3}-3.411639
+{txt}MedianHouseholdIncome {c |}{col 23}{res}{space 2}-5.34e-06{col 35}{space 2} 1.52e-06{col 46}{space 1}   -3.52{col 55}{space 3}0.000{col 63}{space 4}-8.32e-06{col 76}{space 3}-2.36e-06
+{txt}{space 9}PovPerAge017 {c |}{col 23}{res}{space 2}-.0041774{col 35}{space 2} .0047698{col 46}{space 1}   -0.88{col 55}{space 3}0.381{col 63}{space 4}-.0135356{col 76}{space 3} .0051807
+{txt}{space 8}PovPerAllAges {c |}{col 23}{res}{space 2} .0003068{col 35}{space 2} .0071014{col 46}{space 1}    0.04{col 55}{space 3}0.966{col 63}{space 4}-.0136258{col 76}{space 3} .0142395
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2} 4.618158{col 35}{space 2} 1.168623{col 46}{space 1}    3.95{col 55}{space 3}0.000{col 63}{space 4}  2.32536{col 76}{space 3} 6.910955
+{txt}{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+              sigma_u {c |} {res} .87229552
+              {txt}sigma_e {c |} {res} .21195893
+                  {txt}rho {c |} {res} .94424779{txt}   (fraction of variance due to u_i)
+{hline 22}{c BT}{hline 64}
+F test that all u_i=0: F({res}56{txt}, {res}1187{txt}) = {res}218.87{col 62}{txt}Prob > F = {res}0.0000
+
+{com}. outreg , ctitle("Crime 1997-2018",FE P) summtitle("SER"\"R^2"\"Adjusted R^2"\"N") se merge 
+{res}
+{txt}{center:{hline 58}}
+{center:{txt}{lalign 23:Crime 1997-2018}{txt}{center 11:OLS P}{txt}{center 11:OLS V}{txt}{center 11:FE P}}
+{txt}{center:{hline 58}}
+{center:{txt}{lalign 23:CrimeFree}{res}{center 11:-0.571}{res}{center 11:-0.111}{res}{center 11:-0.087}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.105)**}{res}{center 11:(0.087)}{res}{center 11:(0.040)*}}
+{center:{txt}{lalign 23:Black}{res}{center 11:0.111}{res}{center 11:-0.082}{res}{center 11:0.016}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.057)}{res}{center 11:(0.057)}{res}{center 11:(0.022)}}
+{center:{txt}{lalign 23:White}{res}{center 11:-1.136}{res}{center 11:-4.032}{res}{center 11:4.973}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.691)}{res}{center 11:(0.604)**}{res}{center 11:(0.762)**}}
+{center:{txt}{lalign 23:AsianPI}{res}{center 11:-4.066}{res}{center 11:-9.341}{res}{center 11:2.604}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.862)**}{res}{center 11:(0.740)**}{res}{center 11:(1.062)*}}
+{center:{txt}{lalign 23:Hispanic}{res}{center 11:-2.098}{res}{center 11:-0.939}{res}{center 11:-1.286}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.171)**}{res}{center 11:(0.167)**}{res}{center 11:(0.329)**}}
+{center:{txt}{lalign 23:single}{res}{center 11:1.069}{res}{center 11:0.618}{res}{center 11:-1.262}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.371)**}{res}{center 11:(0.337)}{res}{center 11:(0.765)}}
+{center:{txt}{lalign 23:multi}{res}{center 11:0.019}{res}{center 11:-1.492}{res}{center 11:-5.539}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.432)}{res}{center 11:(0.365)**}{res}{center 11:(1.084)**}}
+{center:{txt}{lalign 23:MedianHouseholdIncome}{res}{center 11:-0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.000)**}{res}{center 11:(0.000)*}{res}{center 11:(0.000)**}}
+{center:{txt}{lalign 23:PovPerAge017}{res}{center 11:0.080}{res}{center 11:0.096}{res}{center 11:-0.004}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.009)**}{res}{center 11:(0.009)**}{res}{center 11:(0.005)}}
+{center:{txt}{lalign 23:PovPerAllAges}{res}{center 11:-0.073}{res}{center 11:-0.101}{res}{center 11:0.000}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.012)**}{res}{center 11:(0.012)**}{res}{center 11:(0.007)}}
+{center:{txt}{lalign 23:_cons}{res}{center 11:7.535}{res}{center 11:8.702}{res}{center 11:4.618}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.710)**}{res}{center 11:(0.662)**}{res}{center 11:(1.169)**}}
+{center:{txt}{lalign 23:SER}{res}{center 11:0.53}{res}{center 11:0.55}{res}{center 11:0.47}}
+{center:{txt}{lalign 23:R^2}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}}
+{center:{txt}{lalign 23:Adjusted R^2}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{center:{txt}{lalign 23:N}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{txt}{center:{hline 58}}
+{txt}{center:* p<0.05; ** p<0.01}
+
+
+{com}. xtreg lnviolent CrimeFree Black White AsianPI Hispanic single multi MedianHouseholdIncome PovPerAge017 PovPerAllAges, fe
+{res}
+{txt}Fixed-effects (within) regression{col 49}Number of obs{col 67}={col 69}{res}     1,254
+{txt}Group variable: {res}FIPScounty{txt}{col 49}Number of groups{col 67}={col 69}{res}        57
+
+{txt}R-sq:{col 49}Obs per group:
+     within  = {res}0.0834{col 63}{txt}min{col 67}={col 69}{res}        22
+{txt}     between = {res}0.0013{col 63}{txt}avg{col 67}={col 69}{res}      22.0
+{txt}     overall = {res}0.0038{col 63}{txt}max{col 67}={col 69}{res}        22
+
+{txt}{col 49}F({res}10{txt},{res}1187{txt}){col 67}={col 70}{res}    10.80
+{txt}corr(u_i, Xb){col 16}= {res}-0.3294{txt}{col 49}Prob > F{col 67}={col 73}{res}0.0000
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}            lnviolent{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}CrimeFree {c |}{col 23}{res}{space 2}-.1551389{col 35}{space 2} .0679404{col 46}{space 1}   -2.28{col 55}{space 3}0.023{col 63}{space 4}-.2884355{col 76}{space 3}-.0218424
+{txt}{space 16}Black {c |}{col 23}{res}{space 2}-.1708705{col 35}{space 2} .0371167{col 46}{space 1}   -4.60{col 55}{space 3}0.000{col 63}{space 4}-.2436922{col 76}{space 3}-.0980488
+{txt}{space 16}White {c |}{col 23}{res}{space 2} .8597326{col 35}{space 2} 1.304321{col 46}{space 1}    0.66{col 55}{space 3}0.510{col 63}{space 4}  -1.6993{col 76}{space 3} 3.418765
+{txt}{space 14}AsianPI {c |}{col 23}{res}{space 2} .9238348{col 35}{space 2} 1.818307{col 46}{space 1}    0.51{col 55}{space 3}0.611{col 63}{space 4}-2.643618{col 76}{space 3} 4.491288
+{txt}{space 13}Hispanic {c |}{col 23}{res}{space 2}-2.220543{col 35}{space 2} .5635218{col 46}{space 1}   -3.94{col 55}{space 3}0.000{col 63}{space 4}-3.326152{col 76}{space 3}-1.114933
+{txt}{space 15}single {c |}{col 23}{res}{space 2} .6865124{col 35}{space 2} 1.309436{col 46}{space 1}    0.52{col 55}{space 3}0.600{col 63}{space 4}-1.882554{col 76}{space 3} 3.255579
+{txt}{space 16}multi {c |}{col 23}{res}{space 2} 1.507624{col 35}{space 2} 1.855455{col 46}{space 1}    0.81{col 55}{space 3}0.417{col 63}{space 4}-2.132713{col 76}{space 3} 5.147962
+{txt}MedianHouseholdIncome {c |}{col 23}{res}{space 2} 5.04e-07{col 35}{space 2} 2.60e-06{col 46}{space 1}    0.19{col 55}{space 3}0.846{col 63}{space 4}-4.59e-06{col 76}{space 3} 5.60e-06
+{txt}{space 9}PovPerAge017 {c |}{col 23}{res}{space 2} .0140705{col 35}{space 2} .0081636{col 46}{space 1}    1.72{col 55}{space 3}0.085{col 63}{space 4}-.0019462{col 76}{space 3} .0300873
+{txt}{space 8}PovPerAllAges {c |}{col 23}{res}{space 2}-.0258641{col 35}{space 2} .0121542{col 46}{space 1}   -2.13{col 55}{space 3}0.034{col 63}{space 4}-.0497102{col 76}{space 3}-.0020181
+{txt}{space 16}_cons {c |}{col 23}{res}{space 2} 3.929578{col 35}{space 2} 2.000129{col 46}{space 1}    1.96{col 55}{space 3}0.050{col 63}{space 4} .0053957{col 76}{space 3}  7.85376
+{txt}{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+              sigma_u {c |} {res} .98726023
+              {txt}sigma_e {c |} {res} .36277317
+                  {txt}rho {c |} {res} .88103959{txt}   (fraction of variance due to u_i)
+{hline 22}{c BT}{hline 64}
+F test that all u_i=0: F({res}56{txt}, {res}1187{txt}) = {res}54.72{col 62}{txt}Prob > F = {res}0.0000
+
+{com}. outreg , ctitle("Crime 1997-2018",FE V) summtitle("SER"\"R^2"\"Adjusted R^2"\"N") se merge 
+{res}
+{txt}{center:{hline 69}}
+{center:{txt}{lalign 23:Crime 1997-2018}{txt}{center 11:OLS P}{txt}{center 11:OLS V}{txt}{center 11:FE P}{txt}{center 11:FE V}}
+{txt}{center:{hline 69}}
+{center:{txt}{lalign 23:CrimeFree}{res}{center 11:-0.571}{res}{center 11:-0.111}{res}{center 11:-0.087}{res}{center 11:-0.155}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.105)**}{res}{center 11:(0.087)}{res}{center 11:(0.040)*}{res}{center 11:(0.068)*}}
+{center:{txt}{lalign 23:Black}{res}{center 11:0.111}{res}{center 11:-0.082}{res}{center 11:0.016}{res}{center 11:-0.171}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.057)}{res}{center 11:(0.057)}{res}{center 11:(0.022)}{res}{center 11:(0.037)**}}
+{center:{txt}{lalign 23:White}{res}{center 11:-1.136}{res}{center 11:-4.032}{res}{center 11:4.973}{res}{center 11:0.860}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.691)}{res}{center 11:(0.604)**}{res}{center 11:(0.762)**}{res}{center 11:(1.304)}}
+{center:{txt}{lalign 23:AsianPI}{res}{center 11:-4.066}{res}{center 11:-9.341}{res}{center 11:2.604}{res}{center 11:0.924}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.862)**}{res}{center 11:(0.740)**}{res}{center 11:(1.062)*}{res}{center 11:(1.818)}}
+{center:{txt}{lalign 23:Hispanic}{res}{center 11:-2.098}{res}{center 11:-0.939}{res}{center 11:-1.286}{res}{center 11:-2.221}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.171)**}{res}{center 11:(0.167)**}{res}{center 11:(0.329)**}{res}{center 11:(0.564)**}}
+{center:{txt}{lalign 23:single}{res}{center 11:1.069}{res}{center 11:0.618}{res}{center 11:-1.262}{res}{center 11:0.687}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.371)**}{res}{center 11:(0.337)}{res}{center 11:(0.765)}{res}{center 11:(1.309)}}
+{center:{txt}{lalign 23:multi}{res}{center 11:0.019}{res}{center 11:-1.492}{res}{center 11:-5.539}{res}{center 11:1.508}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.432)}{res}{center 11:(0.365)**}{res}{center 11:(1.084)**}{res}{center 11:(1.855)}}
+{center:{txt}{lalign 23:MedianHouseholdIncome}{res}{center 11:-0.000}{res}{center 11:-0.000}{res}{center 11:-0.000}{res}{center 11:0.000}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.000)**}{res}{center 11:(0.000)*}{res}{center 11:(0.000)**}{res}{center 11:(0.000)}}
+{center:{txt}{lalign 23:PovPerAge017}{res}{center 11:0.080}{res}{center 11:0.096}{res}{center 11:-0.004}{res}{center 11:0.014}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.009)**}{res}{center 11:(0.009)**}{res}{center 11:(0.005)}{res}{center 11:(0.008)}}
+{center:{txt}{lalign 23:PovPerAllAges}{res}{center 11:-0.073}{res}{center 11:-0.101}{res}{center 11:0.000}{res}{center 11:-0.026}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.012)**}{res}{center 11:(0.012)**}{res}{center 11:(0.007)}{res}{center 11:(0.012)*}}
+{center:{txt}{lalign 23:_cons}{res}{center 11:7.535}{res}{center 11:8.702}{res}{center 11:4.618}{res}{center 11:3.930}}
+{center:{txt}{lalign 23:}{res}{center 11:(0.710)**}{res}{center 11:(0.662)**}{res}{center 11:(1.169)**}{res}{center 11:(2.000)*}}
+{center:{txt}{lalign 23:SER}{res}{center 11:0.53}{res}{center 11:0.55}{res}{center 11:0.47}{res}{center 11:0.08}}
+{center:{txt}{lalign 23:R^2}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}{res}{center 11:1,254}}
+{center:{txt}{lalign 23:Adjusted R^2}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{center:{txt}{lalign 23:N}{res}{center 11:}{res}{center 11:}{res}{center 11:}{res}{center 11:}}
+{txt}{center:{hline 69}}
+{txt}{center:* p<0.05; ** p<0.01}
+
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/alexbaker/Documents/Pepperdine/Capstone/Alex Capstone v1 Log File.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}30 Apr 2021, 01:17:24
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

@@ -71,13 +71,19 @@ pwcorr lnviolent lnproperty CrimeFree, star(0.05) sig`
 `pwcorr lnviolent lnproperty CrimeFree single multi mobile Year White Hispanic Black AsianPI  PovPerAge017 
 PovPerAge517 PovPerAllAges MedianHouseholdIncome, star(0.05) sig`
 <img src="images/all_pairwise_correlations.png">
+
 `graph twoway scatter lnviolent lnproperty, msize(small)`
+
 <img src="images/property_and_violent_crime_scatter.png">
+
 `graph twoway scatter lnproperty Year, msize(small)`
+
 <img src="images/log_property_crime.png">
+
 `graph twoway scatter lnviolent  Year, msize(small)`
 
 <img src="images/log_violent_crime.png">
+
 ### Property Crime Regressions
 Conduct simple regressions just using the independent and dependent variables first to see what the relationship is like including the p-value, r-squared, and standard errors. See how it changes when control variables are added. Use ", r" so that that standard errors are robust. Use outreg to save regression output as a table.
 `regress lnproperty CrimeFree, r
